@@ -82,7 +82,7 @@
 
 * Introduction
 ** Article Covered
-- Do and Batzoglou. "What is the expectation maximization algorith?" Nat. Biotechnol. 2008;26:897. cite:doWhatExpectationMaximization2008
+- Do and Batzoglou. "What is the expectation maximization algorith?" Nat. Biotechnol. 2008;26:897. cite:doWhatExpectationMaximization2008 [[https://www.cmi.ac.in/~madhavan/courses/dmml2019jan/literature/EM_algorithm_2coin_example.pdf][pdf1]] [[http://www.utdallas.edu/~prr105020/biol6385/2019/lecture/lecture_4_em_paper.pdf][pdf2]]
 #+ATTR_LATEX: :width 0.8\textwidth :options page=1,keepaspectratio :center t
 [[./source/em_algo.png]]
 \footnotesize
@@ -1409,11 +1409,12 @@ with(ip_data[seq(round(nrow(ip_data) * 0.1), nrow(ip_data)),],
 #+BEGIN_CENTER
 \resizebox{\linewidth}{!}{Sampling Using Stan}
 #+END_CENTER
+
 ** Stan: Hamiltonian Monte Carlo
 - Traditional Bayesian posterior sampling software, such as WinBUGS cite:lunnWinBUGSBayesianModelling2000 and JAGS cite:plummerJAGSProgramAnalysis2003, are Gibbs samplers.
 - Gibbs sampling in this incomplete-data setting implements the data augmentation method.
 - Stan cite:carpenterStanProbabilisticProgramming2017 is a modern Bayesian posterior sampler, which uses more efficient joint posterior sampling scheme based on Hamiltonian Monte Carlo (HMC) cite:betancourtConceptualIntroductionHamiltonian2017.
-- However, HMC cannot handle discrete parameters, so the latent state have to be integrated (summed) out of the posterior (marginal posterior). cite:standevelopmentteamStanUserGuide2019 (Chapter 7)
+- However, HMC cannot handle discrete parameters, so the latent state have to be integrated (summed) out of the posterior (marginal posterior). cite:standevelopmentteamStanUserGuide2019 (Chapter 7) cite:lambertStudentGuideBayesian2018 (Chapters 16 and 19.4)
 - This is very similar to the EM algorithm, which uses the marginalized likelihood.
 
 ** Marginalized Posterior Derivation
