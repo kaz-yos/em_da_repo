@@ -1012,6 +1012,11 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
 #+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
 [[./source/em_rgl_g5_m.png]]
 
+** EM: TODOs
+-
+- Incomplete data likelihood expression
+
+
 * DA Method
 ** Title DA
    :PROPERTIES:
@@ -1373,6 +1378,10 @@ with(ip_data[seq(round(nrow(ip_data) * 0.1), nrow(ip_data)),],
 [[file:./source/em_figure3.pdf]]
 \normalsize
 
+** DA: TODOs
+- Handling of bimodality
+- Pointers to theory of convergence to posterior
+
 * Stan
 ** Title Stan
    :PROPERTIES:
@@ -1384,8 +1393,9 @@ with(ip_data[seq(round(nrow(ip_data) * 0.1), nrow(ip_data)),],
 ** Stan: Hamiltonian Monte Carlo
 - Traditional Bayesian posterior sampling software, such as WinBUGS cite:lunnWinBUGSBayesianModelling2000 and JAGS cite:plummerJAGSProgramAnalysis2003, are Gibbs samplers.
 - Gibbs sampling in this incomplete-data setting implements the data augmentation method.
-- Stan cite:carpenterStanProbabilisticProgramming2017 is a modern Bayesian posterior sampler, which uses more efficient Hamiltonian Monte Carlo (HMC) cite:betancourtConceptualIntroductionHamiltonian2017.
-- However, HMC cannot handle discrete parameters, so the latent state have to be integrated (summed) out of the posterior (marginalized posterior).
+- Stan cite:carpenterStanProbabilisticProgramming2017 is a modern Bayesian posterior sampler, which uses more efficient joint posterior sampling scheme based on Hamiltonian Monte Carlo (HMC) cite:betancourtConceptualIntroductionHamiltonian2017.
+- However, HMC cannot handle discrete parameters, so the latent state have to be integrated (summed) out of the posterior (marginalized posterior). cite:standevelopmentteamStanUserGuide2019 (Chapter 7)
+- This is very similar to the EM algorithm, which uses the marginalized likelihood.
 
 ** Marginalized Posterior Derivation
    :PROPERTIES:
@@ -1461,6 +1471,9 @@ tidybayes::tidy_draws(coin_sample) %>%
 [[file:./source/figure_stan.pdf]]
 \normalsize
 
+** Stan: TODOs
+- Check convergence diagnostics (here $\Rhat$ looks ok) and meaning (same marginal means for both coins)
+- Add constrained prior version
 
 * Appendix
 \appendix
