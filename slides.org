@@ -1,6 +1,6 @@
 * Meta-data :noexport:
   # http://orgmode.org/worg/exporters/beamer/tutorial.html
-  #+TITLE: What is the @@latex:\\@@
+  #+TITLE: DRAFT: What is the @@latex:\\@@
   #+TITLE: Expectation Maximization @@latex:\\@@
   #+TITLE: (EM) Algorithm? @@latex:\\@@
   #+AUTHOR: Kazuki Yoshida @@latex:\\@@
@@ -67,7 +67,7 @@
   #+LATEX_HEADER: \input{\string~/.emacs.d/misc/GrandMacros}
 
 * Opening
-** Personal Background
+** Personal Background                                             :noexport:
    :PROPERTIES:
    :BEAMER_opt: noframenumbering
    :END:
