@@ -1491,6 +1491,57 @@ tidybayes::tidy_draws(coin_sample) %>%
 [[file:./source/figure_stan.pdf]]
 \normalsize
 
+** Stan Implementation (Ordered Prior)
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks,label=,t
+   :END:
+- The marginalized posterior expression can be implemented as follows in the Stan language.
+\scriptsize
+#+BEGIN_SRC R :session *R-org* :results output :exports both
+stan_code_ordered <- readr::read_file("./coin_ordered.stan")
+cat(stan_code_ordered)
+#+END_SRC
+\normalsize
+\scriptsize
+#+BEGIN_SRC R :session *R-org* :results output :exports none
+coin_sample_ordered <- rstan::stan(model_code = stan_code_ordered,
+                                   data = list(a = c(1,1),
+                                               b = c(1,1),
+                                               N = 5,
+                                               X = c(5,9,8,4,7)),
+                                   iter = 10^4,
+                                   chains = 12)
+#+END_SRC
+\normalsize
+
+** Stan Posterior Samples (Ordered Prior)
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+- (TODO) We have a unimodal posterior as we effectively restricted our parameter space to be the upper diagonal.
+
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+\scriptsize
+#+HEADER: :width 7 :height 7
+#+BEGIN_SRC R :session *R-org* :results output graphics :file ./source/figure_stan_ordered.pdf :exports results
+tidybayes::tidy_draws(coin_sample_ordered) %>%
+  select(`theta[1]`, `theta[2]`) %>%
+  with(.,
+       persp(MASS::kde2d(`theta[1]`, `theta[2]`, n = 100),
+             xlim = c(0,1), ylim = c(0,1),
+             main = "Joint Posterior (Stan Ordered Prior)",
+             xlab = "theta0", ylab = "theta1", zlab = "kernel density estimate"))
+#+END_SRC
+
+#+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
+#+RESULTS:
+[[file:./source/figure_stan_ordered.pdf]]
+\normalsize
+
 ** Stan: TODOs
 - Check convergence diagnostics (here $\Rhat$ looks ok) and meaning (same marginal means for both coins)
 - Add constrained prior version
