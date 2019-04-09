@@ -1461,6 +1461,11 @@ coin_sample <- rstan::stan(model_code = stan_code,
                            chains = 12)
 #+END_SRC
 \normalsize
+\scriptsize
+#+BEGIN_SRC R :session *R-org* :results output :exports results
+coin_sample
+#+END_SRC
+\normalsize
 
 ** Stan Posterior Samples
 *** @@latex:@@                                                        :BMCOL:
@@ -1511,6 +1516,11 @@ coin_sample_ordered <- rstan::stan(model_code = stan_code_ordered,
                                                X = c(5,9,8,4,7)),
                                    iter = 10^4,
                                    chains = 12)
+#+END_SRC
+\normalsize
+\scriptsize
+#+BEGIN_SRC R :session *R-org* :results output :exports results
+coin_sample_ordered
 #+END_SRC
 \normalsize
 
