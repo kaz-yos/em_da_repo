@@ -1474,6 +1474,7 @@ coin_sample
     :END:
 - The posterior distribution is essentially the same as the data augmentation version.
 - The same bimodality issue persists.
+- However, quantities that do not refer to a specific component like the posterior predictive for a new observation have no issue. cite:standevelopmentteamStanUserGuide2019 (Chapter 5.5)
 
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
