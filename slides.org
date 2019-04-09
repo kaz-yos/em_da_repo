@@ -86,7 +86,7 @@
 #+ATTR_LATEX: :width 0.8\textwidth :options page=1,keepaspectratio :center t
 [[./source/em_algo.png]]
 \footnotesize
-Presented as a part of the Mini Statistics Camp 2019 hosted by the [[http://bioinformatics.bwh.harvard.edu][BWH/HMS Bioinformatics Club]]
+(To be) Presented as a part of the Mini Statistics Camp 2019 hosted by the [[http://bioinformatics.bwh.harvard.edu][BWH/HMS Bioinformatics Club]]
 
 ** Introduction
 - Probabilistic models, such as hidden Markov models and Bayesian networks, are commonly used to model biological data.
