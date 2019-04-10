@@ -1452,6 +1452,24 @@ cat(stan_code)
 \scriptsize
 #+BEGIN_SRC R :session *R-org* :results output :exports none
 suppressMessages(library(rstan))
+## Configure parallelization
+## Parallel backend for foreach (also loads foreach and parallel; includes doMC)
+library(doParallel)
+## Reproducible parallelization
+library(doRNG)
+## Detect core count (Do not use on clusters)
+n_cores <- parallel::detectCores()
+## Used by parallel::mclapply() as default
+options(mc.cores = n_cores)
+## Used by doParallel as default
+options(cores = n_cores)
+## Register doParallel as the parallel backend with foreach
+## http://stackoverflow.com/questions/28989855/the-difference-between-domc-and-doparallel-in-r
+doParallel::registerDoParallel(cores = n_cores)
+## Report multicore use
+cat("### Using", foreach::getDoParWorkers(), "cores\n")
+cat("### Using", foreach::getDoParName(), "as backend\n")
+##
 coin_sample <- rstan::stan(model_code = stan_code,
                            data = list(a = c(1,1),
                                        b = c(1,1),
@@ -1461,11 +1479,44 @@ coin_sample <- rstan::stan(model_code = stan_code,
                            chains = 12)
 #+END_SRC
 \normalsize
+\newpage
+- Printing the model object gives a summary.
 \scriptsize
 #+BEGIN_SRC R :session *R-org* :results output :exports results
 coin_sample
 #+END_SRC
 \normalsize
+
+** Stan Diagnostic Plots
+*** Trace plot
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+#+HEADER: :width 7 :height 7
+#+BEGIN_SRC R :session *R-org* :results output graphics :file ./source/figure_stan_trace.pdf :exports results
+traceplot(coin_sample, pars = c("theta","lp__"), inc_warmup = TRUE)
+#+END_SRC
+
+#+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
+#+RESULTS:
+[[file:./source/figure_stan_trace.pdf]]
+\normalsize
+
+*** Pairs plot
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+\scriptsize
+#+HEADER: :width 7 :height 7
+#+BEGIN_SRC R :session *R-org* :results output graphics :file ./source/figure_stan_pairs.pdf :exports results
+pairs(coin_sample)
+#+END_SRC
+
+#+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
+#+RESULTS:
+[[file:./source/figure_stan_pairs.pdf]]
+\normalsize
+
 
 ** Stan Posterior Samples
 *** @@latex:@@                                                        :BMCOL:
@@ -1523,6 +1574,36 @@ coin_sample_ordered <- rstan::stan(model_code = stan_code_ordered,
 #+BEGIN_SRC R :session *R-org* :results output :exports results
 coin_sample_ordered
 #+END_SRC
+\normalsize
+
+** Stan Diagnostic Plots (Ordered Prior)
+*** Trace plot
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+#+HEADER: :width 7 :height 7
+#+BEGIN_SRC R :session *R-org* :results output graphics :file ./source/figure_stan_trace_ordered.pdf :exports results
+traceplot(coin_sample_ordered, pars = c("theta","lp__"), inc_warmup = TRUE)
+#+END_SRC
+
+#+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
+#+RESULTS:
+[[file:./source/figure_stan_trace_ordered.pdf]]
+\normalsize
+
+*** Pairs plot
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+\scriptsize
+#+HEADER: :width 7 :height 7
+#+BEGIN_SRC R :session *R-org* :results output graphics :file ./source/figure_stan_pairs_ordered.pdf :exports results
+pairs(coin_sample_ordered)
+#+END_SRC
+
+#+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
+#+RESULTS:
+[[file:./source/figure_stan_pairs_ordered.pdf]]
 \normalsize
 
 ** Stan Posterior Samples (Ordered Prior)
