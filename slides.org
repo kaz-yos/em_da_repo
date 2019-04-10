@@ -366,7 +366,7 @@ B / (A + B)                                # Prob. of Coin B given 5 heads
 \normalsize
 
 \newpage
-- Now we have the probabilities of coin identities.
+- Now we have the probabilities of coin identities (soft assignment cite:hastieElementsStatisticalLearning2016).
 \footnotesize
 | Index | Coin    |              Prob. Coin A |          Prob. Coin B |   Heads | Heads Coin A                     | Heads Coin B                 |
 |   $i$ | $Z_{i}$ | $E[(1-Z_{i})\vert X_{i}]$ | $E[Z_{i}\vert X_{i}]$ | $X_{i}$ | $E[(1-Z_{i}) X_{i} \vert X_{i}]$ | $E[Z_{i} X_{i} \vert X_{i}]$ |
