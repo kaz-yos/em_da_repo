@@ -1517,6 +1517,57 @@ pairs(coin_sample)
 [[file:./source/figure_stan_pairs.pdf]]
 \normalsize
 
+** Visual Representation of Stan Initial Iterations
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+- Some initial draws from the first chain
+- More easily transition between two modes?
+
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+\scriptsize
+#+HEADER: :width 5 :height 5
+#+BEGIN_SRC R :session *R-org* :results output graphics :file ./source/figure_stan_init.pdf :exports results
+max_iter <- 49
+array_coin_sample <- rstan::extract(coin_sample, permuted = FALSE, inc_warmup = TRUE)
+
+path_coin_sample <-
+  bind_cols(array_coin_sample[seq_len(max_iter), , c("theta[1]")] %>%
+            as_tibble() %>%
+            gather(key = chain, value = theta0) %>%
+            mutate(chain = gsub("chain:","", chain)),
+            array_coin_sample[seq_len(max_iter), , c("theta[2]")] %>%
+            as_tibble() %>%
+            gather(key = chain, value = theta1) %>%
+            mutate(chain = gsub("chain:","", chain)) %>%
+            select(-chain))
+
+path_coin_sample %>%
+  filter(chain <= 1) %>%
+  group_by(chain) %>%
+  mutate(r = seq_len(n()) - 2) %>%
+  filter(between(r, 0, max_iter)) %>%
+  ungroup() %>%
+  ggplot(mapping = aes(x = theta0, y = theta1), group = chain) +
+  geom_path(size = 0.1) +
+  geom_text(mapping = aes(label = r), size = 3) +
+  scale_x_continuous(limits = 0:1) +
+  scale_y_continuous(limits = 0:1) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 0, vjust = 0.5),
+        legend.key = element_blank(),
+        plot.title = element_text(hjust = 0.5),
+        strip.background = element_blank())
+#+END_SRC
+
+#+ATTR_LATEX: :width \textwidth :options page=1,keepaspectratio :center t
+#+RESULTS:
+[[file:./source/figure_stan_init.pdf]]
+\normalsize
 
 ** Stan Posterior Samples
 *** @@latex:@@                                                        :BMCOL:
@@ -1568,6 +1619,9 @@ coin_sample_ordered <- rstan::stan(model_code = stan_code_ordered,
                                                X = c(5,9,8,4,7)),
                                    iter = 10^4,
                                    chains = 12)
+out <- rstan::extract(coin_sample_ordered, permuted = FALSE, inc_warmup = TRUE)
+dim(out)
+dimnames(out)
 #+END_SRC
 \normalsize
 \scriptsize
