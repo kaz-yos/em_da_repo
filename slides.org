@@ -1523,8 +1523,7 @@ pairs(coin_sample)
     :PROPERTIES:
     :BEAMER_col: 0.50
     :END:
-- Some initial draws from the first chain
-- More easily transition between two modes?
+- Duplicated points are rejected HMC proposal
 
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
@@ -1667,13 +1666,12 @@ pairs(coin_sample_ordered)
 [[file:./source/figure_stan_pairs_ordered.pdf]]
 \normalsize
 
-** Visual Representation of Stan Initial Iterations
+** Visual Representation of Stan Initial Iterations (Ordered Prior)
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
     :BEAMER_col: 0.50
     :END:
-- Some initial draws from the first chain
-- More easily transition between two modes?
+- Seems to get stuck on the boundary more easily.
 
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
