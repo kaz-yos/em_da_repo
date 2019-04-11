@@ -1536,33 +1536,32 @@ max_iter <- 49
 array_coin_sample <- rstan::extract(coin_sample, permuted = FALSE, inc_warmup = TRUE)
 
 path_coin_sample <-
-  bind_cols(array_coin_sample[seq_len(max_iter), , c("theta[1]")] %>%
+  bind_cols(array_coin_sample[ , , c("theta[1]")] %>%
             as_tibble() %>%
             gather(key = chain, value = theta0) %>%
-            mutate(chain = gsub("chain:","", chain)),
-            array_coin_sample[seq_len(max_iter), , c("theta[2]")] %>%
+            mutate(chain = as.integer(gsub("chain:","", chain))),
+            ##
+            array_coin_sample[ , , c("theta[2]")] %>%
             as_tibble() %>%
             gather(key = chain, value = theta1) %>%
-            mutate(chain = gsub("chain:","", chain)) %>%
+            mutate(chain = as.integer(gsub("chain:","", chain))) %>%
             select(-chain)) %>%
   group_by(chain) %>%
-  ## First two are duplicated.
-  mutate(iter = c(-1,0,seq_len(n() - 2))) %>%
-  filter(iter >= 0)
-
+  mutate(iter = as.integer(c(0,seq_len(n() - 1))),
+         init = (iter == 0)) %>%
+  filter(chain <= 4,
+         between(iter, 0, max_iter))
 
 path_coin_sample %>%
-  filter(chain == 1,
-         between(iter, 0, max_iter)) %>%
   ggplot(mapping = aes(x = theta0, y = theta1), group = chain) +
   geom_path(size = 0.1) +
   geom_text(mapping = aes(label = iter), size = 3) +
   geom_point(data = path_coin_sample %>%
-               filter(chain == 1,
-                      iter %in% c(0, max_iter)),
+               filter(iter %in% c(0, max_iter)),
              shape = 1, size = 5) +
   scale_x_continuous(limits = 0:1) +
   scale_y_continuous(limits = 0:1) +
+  facet_wrap( ~ chain, labeller = label_both) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 0, vjust = 0.5),
         legend.key = element_blank(),
@@ -1664,6 +1663,63 @@ pairs(coin_sample_ordered)
 #+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
 #+RESULTS:
 [[file:./source/figure_stan_pairs_ordered.pdf]]
+\normalsize
+
+** Visual Representation of Stan Initial Iterations
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+- Some initial draws from the first chain
+- More easily transition between two modes?
+
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+\scriptsize
+#+HEADER: :width 5 :height 5
+#+BEGIN_SRC R :session *R-org* :results output graphics :file ./source/figure_stan_init_ordered.pdf :exports results
+max_iter <- 49
+array_coin_sample_ordered <- rstan::extract(coin_sample_ordered, permuted = FALSE, inc_warmup = TRUE)
+
+path_coin_sample_ordered <-
+  bind_cols(array_coin_sample_ordered[ , , c("theta[1]")] %>%
+            as_tibble() %>%
+            gather(key = chain, value = theta0) %>%
+            mutate(chain = as.integer(gsub("chain:","", chain))),
+            ##
+            array_coin_sample_ordered[ , , c("theta[2]")] %>%
+            as_tibble() %>%
+            gather(key = chain, value = theta1) %>%
+            mutate(chain = as.integer(gsub("chain:","", chain))) %>%
+            select(-chain)) %>%
+  group_by(chain) %>%
+  mutate(iter = as.integer(c(0,seq_len(n() - 1))),
+         init = (iter == 0)) %>%
+  filter(chain <= 4,
+         between(iter, 0, max_iter))
+
+path_coin_sample_ordered %>%
+  ggplot(mapping = aes(x = theta0, y = theta1), group = chain) +
+  geom_path(size = 0.1) +
+  geom_text(mapping = aes(label = iter), size = 3) +
+  geom_point(data = path_coin_sample_ordered %>%
+               filter(iter %in% c(0, max_iter)),
+             shape = 1, size = 5) +
+  scale_x_continuous(limits = 0:1) +
+  scale_y_continuous(limits = 0:1) +
+  facet_wrap( ~ chain, labeller = label_both) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 0, vjust = 0.5),
+        legend.key = element_blank(),
+        plot.title = element_text(hjust = 0.5),
+        strip.background = element_blank())
+#+END_SRC
+
+#+ATTR_LATEX: :width \textwidth :options page=1,keepaspectratio :center t
+#+RESULTS:
+[[file:./source/figure_stan_init_ordered.pdf]]
 \normalsize
 
 ** Stan Posterior Samples (Ordered Prior)
