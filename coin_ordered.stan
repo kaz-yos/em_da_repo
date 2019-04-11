@@ -27,12 +27,15 @@ model {
         /* Need for Jacobian adjustment? */
         /* https://mc-stan.org/docs/2_19/stan-users-guide/change-of-variables-chapter.html */
         /* https://discourse.mc-stan.org/t/putting-priors-on-transformed-parameters/2488 */
+        /* https://groups.google.com/forum/#!topic/stan-users/sheMJeXXNL4 */
+        /*  */
         /* Left-hand side of sampling statement (~) may contain a non-linear */
         /* transform of a parameter or local variable. If it does, you need */
         /* to include a target += statement with the log absolute */
         /* determinant of the Jacobian of the transform. */
         /* d/dtheta log(theta/(1-theta)) = 1/(theta(1-theta)) */
-        /* NO NEED IN THIS CASE. */
+        /*  */
+        /* NO NEED IN THIS CASE???? <= Not sure */
         /* We started with theta that we assumed Beta(a,b) on and created logit(theta). */
         /* Thus, we are specifying a correct distribution on theta. */
     }
