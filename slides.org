@@ -1625,9 +1625,6 @@ coin_sample_ordered <- rstan::stan(model_code = stan_code_ordered,
                                                X = c(5,9,8,4,7)),
                                    iter = 10^4,
                                    chains = 12)
-out <- rstan::extract(coin_sample_ordered, permuted = FALSE, inc_warmup = TRUE)
-dim(out)
-dimnames(out)
 #+END_SRC
 \normalsize
 \scriptsize
