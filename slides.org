@@ -678,6 +678,9 @@ lik_data %>%
 #+END_SRC
 
 ** Incomplete-Data Likelihood Expression
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks,label=,t
+   :END:
 \begin{align*}
   &~~~\text{By iid}\\
   L(\btheta | \bx)
@@ -1033,11 +1036,6 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
 #+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
 [[./source/em_rgl_g5_m.png]]
 
-** EM: TODOs
--
-- Incomplete data likelihood expression
-
-
 * DA Method
 ** Title DA
    :PROPERTIES:
@@ -1049,6 +1047,7 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
 
 ** From EM to DA
 - A related Bayesian computation method is the /Data Augmentation/ method. cite:tannerCalculationPosteriorDistributions1987,tannerEMDataAugmentation2010
+- Here we treat the simplest case that reduces to the two-step Gibbs sampling. cite:gemanStochasticRelaxationGibbs1984,vandykArtDataAugmentation2001
 - After random initialization of parameters, two steps alternates until convergence to a posterior distribution.
 - Steps repeated
   1. Imputation (I) Step:
@@ -1056,6 +1055,7 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
      - Draw a latent state
   2. Posterior (P) Step:
      - Draw new parameters given data and latent state
+- The resulting parameter draws from the later sequence constitute draws from the target posterior.
 
 ** Model Configuration
 - To set up a Bayesian computation, we need probability models for the data (likelihood) as well as the parameters (prior).
