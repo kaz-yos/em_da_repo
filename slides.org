@@ -380,9 +380,10 @@ B / (A + B)                                # Prob. of Coin B given 5 heads
 |-------+---------+---------------------------+-----------------------+---------+----------------------------------+------------------------------|
 |   Sum |         |                      2.99 |                  2.01 |         | ?                                | ?                            |
 \normalsize
+- We then have to work with the sufficient statistics (head counts).
 
 \newpage
-- Now we weight the contribution of sufficient statistics accordingly.
+- Since we only know the probabilistic coin identities, we distribute the observed head counts across coins.
 \footnotesize
 | Index | Coin    |              Prob. Coin A |          Prob. Coin B |   Heads | Heads Coin A                     | Heads Coin B                 |
 |   $i$ | $Z_{i}$ | $E[(1-Z_{i})\vert X_{i}]$ | $E[Z_{i}\vert X_{i}]$ | $X_{i}$ | $E[(1-Z_{i}) X_{i} \vert X_{i}]$ | $E[Z_{i} X_{i} \vert X_{i}]$ |
@@ -396,6 +397,7 @@ B / (A + B)                                # Prob. of Coin B given 5 heads
 |-------+---------+---------------------------+-----------------------+---------+----------------------------------+------------------------------|
 |   Sum |         |                      2.99 |                  2.01 |         | ?                                | ?                            |
 \normalsize
+- We then add up the fractional head counts for each coin.
 
 \newpage
 - Calculate the expected heads and consider expected tosses.
