@@ -1416,7 +1416,7 @@ with(ip_data[seq(round(nrow(ip_data) * 0.1), nrow(ip_data)),],
 - Gibbs sampling in this incomplete-data setting implements the data augmentation method.
 - Stan cite:carpenterStanProbabilisticProgramming2017 is a modern Bayesian posterior sampler, which uses more efficient joint posterior sampling scheme based on Hamiltonian Monte Carlo (HMC) cite:betancourtConceptualIntroductionHamiltonian2017.
 - However, HMC cannot handle discrete parameters, so the latent state have to be integrated (summed) out of the posterior (marginal posterior). cite:standevelopmentteamStanUserGuide2019 (Chapter 7) cite:lambertStudentGuideBayesian2018 (Chapters 16 and 19.4)
-- This is very similar to the EM algorithm, which uses the marginalized likelihood.
+- This is very similar to the EM algorithm, which uses the marginal likelihood.
 
 ** Marginalized Posterior Derivation
    :PROPERTIES:
@@ -1609,7 +1609,8 @@ tidybayes::tidy_draws(coin_sample) %>%
    :PROPERTIES:
    :BEAMER_opt: allowframebreaks,label=,t
    :END:
-- The marginalized posterior expression can be implemented as follows in the Stan language.
+- We can avoid the indeterminancy (bimodality) by restricting the prior such that $\theta_{0} \le \theta_{1}$ with probability 1, which in turn restricts the posterior.
+- This approach required some tricks as explained in the Stan code.
 \scriptsize
 #+BEGIN_SRC R :session *R-org* :results output :exports both
 stan_code_ordered <- readr::read_file("./coin_ordered.stan")
@@ -1668,7 +1669,7 @@ pairs(coin_sample_ordered)
     :PROPERTIES:
     :BEAMER_col: 0.50
     :END:
-- Seems to get stuck on the boundary more easily.
+- The lower diagonal part is ruled out by the prior, so the chains only wander around the upper diagonal space.
 
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
@@ -1724,7 +1725,7 @@ path_coin_sample_ordered %>%
     :PROPERTIES:
     :BEAMER_col: 0.50
     :END:
-- (TODO) We have a unimodal posterior as we effectively restricted our parameter space to be the upper diagonal.
+- We have a unimodal posterior as we effectively banned the lower diagonal mode previously seen.
 
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
