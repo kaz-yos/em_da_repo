@@ -1399,6 +1399,130 @@ with(ip_data[seq(round(nrow(ip_data) * 0.1), nrow(ip_data)),],
 [[file:./source/em_figure3.pdf]]
 \normalsize
 
+** IP: Another Visualization
+#+BEGIN_SRC R :session *R-org* :results output :exports none
+ip_iter2 <- function(theta, a = c(1,1), b = c(1,1), iter = 10) {
+  draws <- data.frame(theta0 = c(theta[1], rep(as.numeric(NA), iter)),
+                      theta1 = c(theta[2], rep(as.numeric(NA), iter)),
+                      Z1 = rep(as.numeric(NA), iter + 1),
+                      Z2 = rep(as.numeric(NA), iter + 1),
+                      Z3 = rep(as.numeric(NA), iter + 1),
+                      Z4 = rep(as.numeric(NA), iter + 1),
+                      Z5 = rep(as.numeric(NA), iter + 1))
+  for (i in seq_len(iter)) {
+    ip_step_out <- ip_step(as.numeric(draws[i,]), a, b)
+    draws[i, paste0("Z",1:5)] <- ip_step_out$I$Coin[-6]
+    draws[i+1, c("theta0","theta1")] <- ip_step_out$P
+  }
+  return(as.tibble(draws))
+}
+
+ip_iter2_out <- ip_iter2(c(0.6,0.5), c(1,1), c(1,1), iter = 10) %>%
+  group_by(theta0,theta1) %>%
+  mutate(heads0 = sum(c(5*(1-Z1),9*(1-Z2),8*(1-Z3),4*(1-Z4),7*(1-Z5))),
+         heads1 = sum(c(5*Z1,9*Z2,8*Z3,4*Z4,7*Z5)),
+         tails0 = sum(c(5*(1-Z1),1*(1-Z2),2*(1-Z3),6*(1-Z4),3*(1-Z5))),
+         tails1 = sum(c(5*Z1,1*Z2,2*Z3,6*Z4,3*Z5))) %>%
+  ungroup() %>%
+  mutate(gt = pmap(list(heads0, tails0,
+                        heads1, tails1),
+                   function(h0,t0,h1,t1) {
+                     ## Return a function
+                     function(theta0, theta1) {
+                       dbeta(theta0, shape1 = 1 + h0, shape2 = 1 + t0) *
+                         dbeta(theta1, shape1 = 1 + h1, shape2 = 1 + t1)
+                     }
+                   })) %>%
+  mutate(mat = map(gt, function(fun) {
+    lik_data %>%
+      mutate(gt_lik = fun(theta0, theta1)) %>%
+      select(theta0, theta1, gt_lik) %>%
+      spread(key = theta1, value = gt_lik) %>%
+      as.matrix(.) %>%
+      `[`(,-1)
+  }))
+
+## https://stackoverflow.com/questions/18065669/setting-size-of-the-rgl-device
+## windowRect: left, top, right and bottom of the displayed window
+par3d(windowRect = c(20, 30, 800, 800),
+      zoom = 0.7)
+## Set up the plot space.
+with(lik_data,
+     plot3d(x = theta0, y = theta1, z = lik / max(lik),
+            ## n_othing: Do not plot anything, just the framework.
+            type = "n",
+            xlab = "theta0", ylab = "theta1", zlab = "Likelihood",
+            xlim = c(0,1), ylim = c(0,1),
+            aspect = c(1, 1, 0.7)))
+## Incomplete-data likelihood
+max_incompl_lik <- max(lik_data_gt$mat[[1]])
+surface3d(x = grid, y = grid, z = lik_data_gt$mat[[1]] / max_incompl_lik,
+          back = "line", front = "line", col = "gray",
+          lwd = 1, alpha = 0.1)
+rgl.snapshot(filename = "./source/ip_rgl_.png", fmt = "png", top = TRUE)
+
+## Loop over iterations
+for (i in seq_len(nrow(ip_iter2_out) - 2)) {
+  ## Flush
+  with(lik_data,
+       plot3d(x = theta0, y = theta1, z = lik / max(lik),
+              ## n_othing: Do not plot anything, just the framework.
+              type = "n",
+              xlab = "theta0", ylab = "theta1", zlab = "Likelihood",
+              xlim = c(0,1), ylim = c(0,1),
+              aspect = c(1, 1, 0.7)))
+  surface3d(x = grid, y = grid, z = lik_data_gt$mat[[1]] / max_incompl_lik,
+            back = "line", front = "line", col = "gray",
+            lwd = 1, alpha = 0.1)
+
+  if (i > 1) {
+    for (j in seq_len(i-1)) {
+      ## Add current parameter estimate on incomplete-data likelihood surface
+      ## points3d(x = ip_iter2_out$theta0[j], y = ip_iter2_out$theta1[j],
+      ##          z = exp(llik_incompl(ip_iter2_out$theta0[j], ip_iter2_out$theta1[j])) / max_incompl_lik)
+      ## Add segment indicating move
+      segments3d(x = c(ip_iter2_out$theta0[j], ip_iter2_out$theta0[j + 1]),
+                 y = c(ip_iter2_out$theta1[j], ip_iter2_out$theta1[j + 1]),
+                 z = c(exp(llik_incompl(ip_iter2_out$theta0[j], ip_iter2_out$theta1[j])),
+                       exp(llik_incompl(ip_iter2_out$theta0[j + 1], ip_iter2_out$theta1[j + 1]))) / max_incompl_lik)
+    }
+  }
+  ## Add gt
+  surface3d(x = grid, y = grid, z = ip_iter2_out$mat[[i]] / max(ip_iter2_out$mat[[i]]),
+            back = "line", front = "line", col = "blue",
+            lwd = 1, alpha = 0.1)
+
+  ## Save E Step plot
+  rgl.snapshot(filename = sprintf("./source/ip_rgl_%s_e.png", i-0),
+               fmt = "png", top = TRUE)
+  ## Add segment indicating move
+  segments3d(x = c(ip_iter2_out$theta0[i], ip_iter2_out$theta0[i + 1]),
+             y = c(ip_iter2_out$theta1[i], ip_iter2_out$theta1[i + 1]),
+             z = c(exp(llik_incompl(ip_iter2_out$theta0[i], ip_iter2_out$theta1[i])),
+                   exp(llik_incompl(ip_iter2_out$theta0[i + 1], ip_iter2_out$theta1[i + 1]))) / max_incompl_lik)
+  ## Save M Step plot
+  rgl.snapshot(filename = sprintf("./source/ip_rgl_%s_m.png", i-0),
+               fmt = "png", top = TRUE)
+}
+
+## Convert to a gif
+## https://www.r-bloggers.com/animate-gif-images-in-r-imagemagick/
+system("convert -delay 80 ./source/ip_rgl_*.png ./source/ip_rgl.gif")
+#+END_SRC
+
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+- Incomplete-data likelihood function.
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+#+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
+[[./source/em_rgl_.png]]
+
+
 ** DA: TODOs
 - Handling of bimodality
 - Pointers to theory of convergence to posterior
