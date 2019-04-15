@@ -1870,10 +1870,6 @@ tidybayes::tidy_draws(coin_sample_ordered) %>%
 [[file:./source/figure_stan_ordered.pdf]]
 \normalsize
 
-** Stan: TODOs
-- Check convergence diagnostics (here $\Rhat$ looks ok) and meaning (same marginal means for both coins)
-- Add constrained prior version
-
 * Appendix
 \appendix
 ** Bibliography
