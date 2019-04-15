@@ -25,21 +25,9 @@ model {
     /* Prior's contribution to posterior log probability. */
     for (j in 1:2) {
         /* Need for Jacobian adjustment */
+        /* http://rpubs.com/kaz_yos/stan_jacobian */
         /*  */
-        /* 20.3 Changes of Variables (See the second inv-gamma/gamma example) */
-        /* https://mc-stan.org/docs/2_19/stan-users-guide/changes-of-variables.html */
-        /*  */
-        /* Putting priors on transformed parameters */
-        /* https://discourse.mc-stan.org/t/putting-priors-on-transformed-parameters/2488 */
-        /* Stan users mailing list Prior on transformed parameters? */
-        /* https://groups.google.com/forum/#!topic/stan-users/sheMJeXXNL4 */
-        /*  */
-        /* Left-hand side of sampling statement (~) may contain a non-linear */
-        /* transform of a parameter or local variable. If it does, you need */
-        /* to include a target += statement with the log absolute */
-        /* determinant of the Jacobian of the transform. */
-        /*  */
-        /* We have to make the distribution of log_odss_theta contribute. */
+        /* We have to make the distribution of log_odss_theta (eta here) contribute. */
         /* Let eta = log(theta / (1 - theta)) */
         /* theta = e^eta / (1 + e^eta) = expit(eta) */
         /* Check: https://www.wolframalpha.com/input/?i=e%5Ex+%2F+(1+%2Be%5Ex) */
