@@ -873,6 +873,8 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
     :BEAMER_col: 0.50
     :END:
 - Incomplete-data likelihood function.
+- [[https://github.com/kaz-yos/em_da_repo/blob/master/source/em_rgl.gif][Animated gif on Github]]
+
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
     :BEAMER_col: 0.50
@@ -1399,7 +1401,7 @@ with(ip_data[seq(round(nrow(ip_data) * 0.1), nrow(ip_data)),],
 [[file:./source/em_figure3.pdf]]
 \normalsize
 
-** IP: Animation
+** DA: Animation
 #+BEGIN_SRC R :session *R-org* :results output :exports none
 ip_iter2 <- function(theta, a = c(1,1), b = c(1,1), iter = 10) {
   draws <- data.frame(theta0 = c(theta[1], rep(as.numeric(NA), iter)),
