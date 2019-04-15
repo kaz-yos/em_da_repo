@@ -1,6 +1,6 @@
 * Meta-data :noexport:
   # http://orgmode.org/worg/exporters/beamer/tutorial.html
-  #+TITLE: DRAFT: What is the @@latex:\\@@
+  #+TITLE: What is the @@latex:\\@@
   #+TITLE: Expectation Maximization @@latex:\\@@
   #+TITLE: (EM) Algorithm? @@latex:\\@@
   #+AUTHOR: Kazuki Yoshida @@latex:\\@@
@@ -86,7 +86,7 @@
 #+ATTR_LATEX: :width 0.8\textwidth :options page=1,keepaspectratio :center t
 [[./source/em_algo.png]]
 \footnotesize
-(To be) Presented as a part of the Mini Statistics Camp 2019 hosted by the [[http://bioinformatics.bwh.harvard.edu][BWH/HMS Bioinformatics Club]]
+To be presented as a part of the Mini Statistics Camp 2019 hosted by the [[http://bioinformatics.bwh.harvard.edu][BWH/HMS Bioinformatics Club]]. The slides contain the corresponding Bayesian inference using the [[DA Method][Data Augmentation]] method and [[Stan][Stan]].
 
 ** Introduction
 - Probabilistic models, such as hidden Markov models and Bayesian networks, are commonly used to model biological data.
@@ -96,6 +96,7 @@
 
 
 - The Expectation-Maximization (EM) algorithm enables parameter estimation in probabilistic models with incomplete data.
+
 
 ** Incomplete data
 *** @@latex:@@                                                        :BMCOL:
@@ -1039,6 +1040,7 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
 [[./source/em_rgl_g5_m.png]]
 
 * DA Method
+\appendix
 ** Title DA
    :PROPERTIES:
    :BEAMER_ENV: fullframe
@@ -1526,6 +1528,7 @@ system("convert -delay 80 ./source/ip_rgl_*.png ./source/ip_rgl.gif")
 [[./source/ip_rgl_.png]]
 
 * Stan
+\appendix
 ** Title Stan
    :PROPERTIES:
    :BEAMER_ENV: fullframe
