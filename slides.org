@@ -1399,7 +1399,7 @@ with(ip_data[seq(round(nrow(ip_data) * 0.1), nrow(ip_data)),],
 [[file:./source/em_figure3.pdf]]
 \normalsize
 
-** IP: Another Visualization
+** IP: Animation
 #+BEGIN_SRC R :session *R-org* :results output :exports none
 ip_iter2 <- function(theta, a = c(1,1), b = c(1,1), iter = 10) {
   draws <- data.frame(theta0 = c(theta[1], rep(as.numeric(NA), iter)),
@@ -1513,17 +1513,15 @@ system("convert -delay 80 ./source/ip_rgl_*.png ./source/ip_rgl.gif")
     :BEAMER_col: 0.50
     :END:
 - Incomplete-data likelihood function.
+- [[https://github.com/kaz-yos/em_da_repo/blob/master/source/ip_rgl.gif][Animated gif on Github]]
+- Note that the marginalized posterior and tentative posteriors are not drawn to the scale.
+
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
     :BEAMER_col: 0.50
     :END:
 #+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
-[[./source/em_rgl_.png]]
-
-
-** DA: TODOs
-- Handling of bimodality
-- Pointers to theory of convergence to posterior
+[[./source/ip_rgl_.png]]
 
 * Stan
 ** Title Stan
