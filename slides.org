@@ -1417,7 +1417,7 @@ ip_iter2 <- function(theta, a = c(1,1), b = c(1,1), iter = 10) {
   return(as.tibble(draws))
 }
 
-ip_iter2_out <- ip_iter2(c(0.6,0.5), c(1,1), c(1,1), iter = 20) %>%
+ip_iter2_out <- ip_iter2(c(0.6,0.5), c(1,1), c(1,1), iter = 30) %>%
   group_by(theta0,theta1) %>%
   mutate(heads0 = sum(c(5*(1-Z1),9*(1-Z2),8*(1-Z3),4*(1-Z4),7*(1-Z5))),
          heads1 = sum(c(5*Z1,9*Z2,8*Z3,4*Z4,7*Z5)),
@@ -1492,14 +1492,14 @@ for (i in seq_len(nrow(ip_iter2_out) - 2)) {
             lwd = 1, alpha = 0.1)
 
   ## Save E Step plot
-  rgl.snapshot(filename = sprintf("./source/ip_rgl_%s_e.png", i-0),
+  rgl.snapshot(filename = sprintf("./source/ip_rgl_%02d_1.png", i-0),
                fmt = "png", top = TRUE)
   ## Add segment indicating move
   segments3d(x = c(ip_iter2_out$theta0[i], ip_iter2_out$theta0[i + 1]),
              y = c(ip_iter2_out$theta1[i], ip_iter2_out$theta1[i + 1]),
              z = 0)
   ## Save M Step plot
-  rgl.snapshot(filename = sprintf("./source/ip_rgl_%s_m.png", i-0),
+  rgl.snapshot(filename = sprintf("./source/ip_rgl_%02d_2.png", i-0),
                fmt = "png", top = TRUE)
 }
 
