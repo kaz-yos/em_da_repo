@@ -248,8 +248,8 @@ lik_data %>%
   - Assign some initial guess for parameters
   - Guess coin identities given data and assuming these parameter values
   - Perform MLE given data and assuming coin identities
-- The Expectation-Maximization (EM) Algorithm cite:dempsterMaximumLikelihoodIncomplete1977 is a refinement of this idea for MLE.
-- The Data Augmentation Method cite:tannerCalculationPosteriorDistributions1987 is another type of refinement for Bayesian estimation.
+- The [[EM Algorithm][Expectation-Maximization (EM) Algorithm]] cite:dempsterMaximumLikelihoodIncomplete1977 is a refinement of this idea for MLE.
+- The [[DA Method][Data Augmentation Method]] cite:tannerCalculationPosteriorDistributions1987 is another type of refinement for Bayesian estimation.
 
 * EM Algorithm
 ** Title EM
@@ -303,34 +303,11 @@ lik_data %>%
 |   Sum |         | ?                         | ?                     |      33 | ?                                | ?                            |
 \normalsize
 - First, we need coin probabilities for each $i$ given the current parameter values $\bthetahat^{(0)}$.
-- We will focus on $E_{\bthetahat^{(0)}}[Z_{i} | X_{i} = x_{i}]$, the probability of Coin B given the number of heads observed and current parameters.
 
 \newpage
-- Probability of Coin B given the number of heads observed and current parameters:
-\footnotesize
-\begin{align*}
-  E_{\bthetahat^{(0)}}[Z_{i} | X_{i} = x_{i}] &= P_{\bthetahat^{(0)}}[Z_{i} = 1 | X_{i} = x_{i}]\\
-  &~~~\text{Bayes rule}\\
-  &= \frac{P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1] P_{\bthetahat^{(0)}}[Z_{i} = 1]}
-          {\sum\limits^{1}_{z=0} P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = z] P_{\bthetahat^{(0)}}[Z_{i} = z]}\\
-  &~~~\text{Coin choice probability = 0.5}\\
-  &= \frac{P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1] (0.5)}
-          {\sum\limits^{1}_{z=0} P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = z] (0.5)}\\
-  &= \frac{P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1]}
-          {P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 0] + P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1]}
-\end{align*}
-\normalsize
+- We will focus on $E_{\bthetahat^{(0)}}[Z_{i} | X_{i} = x_{i}]$, the probability of Coin B given the number of heads observed and current parameters ($\thetahat_{0}^{(0)} = 0.6, \thetahat_{1}^{(0)} = 0.5$).
+- This quantity can be calculated as follows for the first row (5 heads).
 
-\newpage
-\footnotesize
-\begin{align*}
-  E_{\bthetahat^{(0)}}[Z_{i} | X_{i} = x_{i}]
-  &= \frac{P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1]}
-          {P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 0] + P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1]}
-\end{align*}
-\normalsize
-- $P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = z]$ is the probability mass (=dbinom=) of the observed $X_{i}$ assuming coin identity $z$ and current parameters.
-- Thus, this quantity, the probability of Coin B given the the observed $X_{i}$ and the current parameters, can be calculated as follows for the first row (5 heads).
 \scriptsize
 #+BEGIN_SRC R :session *R-org* :results output :exports both
 A <- dbinom(x = 5, size = 10, prob = 0.60) # Prob. of 5 heads given Coin A
@@ -338,9 +315,11 @@ B <- dbinom(x = 5, size = 10, prob = 0.50) # Prob. of 5 heads given Coin B
 B / (A + B)                                # Prob. of Coin B given 5 heads
 #+END_SRC
 \normalsize
+- See also [[Coin Probability Derivation][Coin Probability Derivation]].
 
 \newpage
-- Now we have the probabilities of coin identities (soft assignment cite:hastieElementsStatisticalLearning2016).
+- Now we have the probabilities of coin identities.
+- This is sometimes called "soft assignment" cite:hastieElementsStatisticalLearning2016.
 \footnotesize
 | Index | Coin    |              Prob. Coin A |          Prob. Coin B |   Heads | Heads Coin A                     | Heads Coin B                 |
 |   $i$ | $Z_{i}$ | $E[(1-Z_{i})\vert X_{i}]$ | $E[Z_{i}\vert X_{i}]$ | $X_{i}$ | $E[(1-Z_{i}) X_{i} \vert X_{i}]$ | $E[Z_{i} X_{i} \vert X_{i}]$ |
@@ -1051,6 +1030,21 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
 \end{align*}
 - We can take partial derivatives with respect to $\theta_{0}$ and $\theta_{1}$ and set them to zero to solve for MLE, which gives us heads/tosses for each coin.
 
+** Coin Probability Derivation
+- Probability of Coin B given the number of heads observed and current parameters:
+\footnotesize
+\begin{align*}
+  E_{\bthetahat^{(0)}}[Z_{i} | X_{i} = x_{i}] &= P_{\bthetahat^{(0)}}[Z_{i} = 1 | X_{i} = x_{i}]\\
+  &~~~\text{Bayes rule}\\
+  &= \frac{P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1] P_{\bthetahat^{(0)}}[Z_{i} = 1]}
+          {\sum\limits^{1}_{z=0} P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = z] P_{\bthetahat^{(0)}}[Z_{i} = z]}\\
+  &~~~\text{Coin choice probability = 0.5}\\
+  &= \frac{P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1] (0.5)}
+          {\sum\limits^{1}_{z=0} P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = z] (0.5)}\\
+  &= \frac{P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1]}
+          {P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 0] + P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1]}
+\end{align*}
+\normalsize
 
 * DA Method
 \appendix
