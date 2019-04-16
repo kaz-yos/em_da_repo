@@ -1467,7 +1467,7 @@ rgl.snapshot(filename = "./source/ip_rgl_.png", fmt = "png", top = TRUE)
 
 ## Loop over iterations
 for (i in seq_len(nrow(ip_iter2_out) - 2)) {
-  ## Flush
+  ## Refresh the plot
   with(lik_data,
        plot3d(x = theta0, y = theta1, z = lik / max(lik),
               ## n_othing: Do not plot anything, just the framework.
@@ -1475,9 +1475,14 @@ for (i in seq_len(nrow(ip_iter2_out) - 2)) {
               xlab = "theta0", ylab = "theta1", zlab = "Likelihood",
               xlim = c(0,1), ylim = c(0,1),
               aspect = c(1, 1, 0.7)))
+  ## Add incomplete-data likelihood
   surface3d(x = grid, y = grid, z = lik_data_gt$mat[[1]] / max_incompl_lik,
             back = "line", front = "line", col = "gray",
             lwd = 1, alpha = 0.1)
+  ## Add initial point
+  points3d(x = c(ip_iter2_out$theta0[1]),
+           y = c(ip_iter2_out$theta1[1]),
+           z = 0)
 
   if (i > 1) {
     for (j in seq_len(i-1)) {
