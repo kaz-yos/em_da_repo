@@ -157,42 +157,15 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the [[http:
 |   Sum |         |                               3 |                           2 |      33 | 24                                     | 9                                  |
 - MLE: $\thetahat_{0} = 24 / (3 \times 10) = 0.80$; $\thetahat_{1} = 9 / (2 \times 10) = 0.45$
 
-** Complete-Data Likelihood and Log Likelihood
-   :PROPERTIES:
-   :BEAMER_opt: allowframebreaks,label=,t
-   :END:
-\begin{align*}
-  L(\btheta | \bz,\bx)
-  &= \prod^{5}_{i=1} p(z_{i},x_{i} | \btheta)\\
-  &= \prod^{5}_{i=1} p(x_{i} | z_{i}, \btheta) p(z_{i} | \btheta)\\
-  &= \prod^{5}_{i=1} p(x_{i} | z_{i}, \btheta) p(z_{i})\\
-  &= \prod^{5}_{i=1} p(x_{i} | z_{i}, \btheta) (0.5)\\
-  &\propto \prod^{5}_{i=1}
-    \left[ \theta_{0}^{x_{i}}(1-\theta_{0})^{10-x_{i}} \right]^{1-z_{i}}
-    \left[ \theta_{1}^{x_{i}}(1-\theta_{1})^{10-x_{i}} \right]^{z_{i}}\\
-  \log L(\btheta | \bz,\bx)
-  &\propto \sum^{5}_{i=1}
-    \left\{
-    (1-z_{i}) \log \left[ \theta_{0}^{x_{i}}(1-\theta_{0})^{10-x_{i}} \right] +
-    z_{i} \log \left[ \theta_{1}^{x_{i}}(1-\theta_{1})^{10-x_{i}} \right]
-    \right\}\\
-  &= \sum^{5}_{i=1}
-    \left\{
-    (1-z_{i}) \left[ x_{i}\log\theta_{0} + (10-x_{i})\log(1-\theta_{0})\right]
-    \right.\\
-  &~~~~~~~~~ \left.
-    + z_{i} \left[ x_{i}\log\theta_{1} + (10-x_{i})\log(1-\theta_{1})\right]
-    \right\}
-\end{align*}
-- We can take partial derivatives with respect to $\theta_{0}$ and $\theta_{1}$ and set them to zero to solve for MLE, which gives us heads/tosses for each coin.
-
 ** Complete-Data Likelihood Visualization
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
     :BEAMER_col: 0.50
     :END:
-- Here the complete-data likelihood function is convex.
-- There is a unique maximum with an analytical solution (coin-specific heads/tosses).
+- The maximum likelihood estimate (MLE) is the parameter values at the peak of the figure.
+- Here the complete-data likelihood function has a unique global maximum.
+- There is an analytical solution: Heads / Tosses for each coin.
+- See [[Complete-Data Likelihood and Log Likelihood]] for the mathematical expression.
 
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
@@ -1038,6 +1011,46 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
     :END:
 #+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
 [[./source/em_rgl_g5_m.png]]
+
+* EM Extra slides
+\appendix
+** Title DA
+   :PROPERTIES:
+   :BEAMER_ENV: fullframe
+   :END:
+#+BEGIN_CENTER
+\resizebox{\linewidth}{!}{EM Extra Slides}
+#+END_CENTER
+
+** Complete-Data Likelihood and Log Likelihood
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks,label=,t
+   :END:
+\begin{align*}
+  L(\btheta | \bz,\bx)
+  &= \prod^{5}_{i=1} p(z_{i},x_{i} | \btheta)\\
+  &= \prod^{5}_{i=1} p(x_{i} | z_{i}, \btheta) p(z_{i} | \btheta)\\
+  &= \prod^{5}_{i=1} p(x_{i} | z_{i}, \btheta) p(z_{i})\\
+  &= \prod^{5}_{i=1} p(x_{i} | z_{i}, \btheta) (0.5)\\
+  &\propto \prod^{5}_{i=1}
+    \left[ \theta_{0}^{x_{i}}(1-\theta_{0})^{10-x_{i}} \right]^{1-z_{i}}
+    \left[ \theta_{1}^{x_{i}}(1-\theta_{1})^{10-x_{i}} \right]^{z_{i}}\\
+  \log L(\btheta | \bz,\bx)
+  &\propto \sum^{5}_{i=1}
+    \left\{
+    (1-z_{i}) \log \left[ \theta_{0}^{x_{i}}(1-\theta_{0})^{10-x_{i}} \right] +
+    z_{i} \log \left[ \theta_{1}^{x_{i}}(1-\theta_{1})^{10-x_{i}} \right]
+    \right\}\\
+  &= \sum^{5}_{i=1}
+    \left\{
+    (1-z_{i}) \left[ x_{i}\log\theta_{0} + (10-x_{i})\log(1-\theta_{0})\right]
+    \right.\\
+  &~~~~~~~~~ \left.
+    + z_{i} \left[ x_{i}\log\theta_{1} + (10-x_{i})\log(1-\theta_{1})\right]
+    \right\}
+\end{align*}
+- We can take partial derivatives with respect to $\theta_{0}$ and $\theta_{1}$ and set them to zero to solve for MLE, which gives us heads/tosses for each coin.
+
 
 * DA Method
 \appendix
