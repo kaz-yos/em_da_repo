@@ -630,12 +630,6 @@ lik_data %>%
         xlab = "theta0", ylab = "theta1", zlab = "Likelihood")
 #+END_SRC
 
-** EM Algorithm Applications
-- Many probabilistic models in computational biology include latent variables. cite:doWhatExpectationMaximization2008
-  - Gene expression clustering
-  - Motif finding
-  - Haplotype inference
-
 ** EM: Incomplete-Data Likelihood
 #+BEGIN_SRC R :session *R-org* :results output :exports none
 construct_gt <- function(thetahat0_t, thetahat1_t) {
@@ -902,6 +896,12 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
     :END:
 #+ATTR_LATEX: :height \textheight :width \textwidth :options page=1,keepaspectratio :center t
 [[./source/em_rgl_g5_m.png]]
+
+** EM Algorithm Applications
+- Many probabilistic models in computational biology include latent variables. cite:doWhatExpectationMaximization2008
+  - Gene expression clustering
+  - Motif finding
+  - Haplotype inference
 
 * EM Extra slides
 \appendix
