@@ -590,7 +590,7 @@ crossing(init0 = init,
     :PROPERTIES:
     :BEAMER_col: 0.50
     :END:
-- In this specific instance, the incomplete-data likelihood can be graphed with grid search as the parameter space is small and low dimensional ([0,1]^{2}).
+- In this specific instance, the [[Incomplete-Data Likelihood Derivation][incomplete-data likelihood]] can be graphed with grid search as the parameter space is small and low dimensional ([0,1]^{2}).
 - The incomplete-data likelihood is bimodal and has a saddle point between the modes.
 - This shape explains the three solutions.
 
@@ -629,28 +629,6 @@ lik_data %>%
         main = "Incomplete-Data Likelihood",
         xlab = "theta0", ylab = "theta1", zlab = "Likelihood")
 #+END_SRC
-
-** Incomplete-Data Likelihood Expression
-   :PROPERTIES:
-   :BEAMER_opt: allowframebreaks,label=,t
-   :END:
-\begin{align*}
-  &~~~\text{By iid}\\
-  L(\btheta | \bx)
-  &= \prod^{5}_{i=1}p(x_{i} | \btheta)\\
-  &~~~\text{Introduce latent sate}\\
-  &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(x_{i}, z_{i} | \btheta)\\
-  &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(x_{i} | z_{i}, \btheta) p(z_{i} | \btheta)\\
-  &~~~\text{$z_{i}$ does not depend on $\btheta$}\\
-  &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(x_{i} | z_{i}, \btheta) p(z_{i})\\
-  &~~~\text{$p(z_{i})$ constant}\\
-  &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(x_{i} | z_{i}, \btheta) (0.5)\\
-  &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0}
-    (0.5) \binom{10}{x_{i}}
-    \left[ \theta_{0}^{x_{i}}(1-\theta_{0})^{10-x_{i}} \right]^{1-z_{i}}
-    \left[ \theta_{1}^{x_{i}}(1-\theta_{1})^{10-x_{i}} \right]^{z_{i}}\\
-\end{align*}
-
 
 ** EM Algorithm Applications
 - Many probabilistic models in computational biology include latent variables. cite:doWhatExpectationMaximization2008
@@ -1045,6 +1023,27 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
           {P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 0] + P_{\bthetahat^{(0)}}[X_{i} = x_{i} | Z_{i} = 1]}
 \end{align*}
 \normalsize
+
+** Incomplete-Data Likelihood Derivation
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks,label=,t
+   :END:
+\begin{align*}
+  &~~~\text{By iid}\\
+  L(\btheta | \bx)
+  &= \prod^{5}_{i=1}p(x_{i} | \btheta)\\
+  &~~~\text{Introduce latent sate}\\
+  &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(x_{i}, z_{i} | \btheta)\\
+  &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(x_{i} | z_{i}, \btheta) p(z_{i} | \btheta)\\
+  &~~~\text{$z_{i}$ does not depend on $\btheta$}\\
+  &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(x_{i} | z_{i}, \btheta) p(z_{i})\\
+  &~~~\text{$p(z_{i})$ constant}\\
+  &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(x_{i} | z_{i}, \btheta) (0.5)\\
+  &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0}
+    (0.5) \binom{10}{x_{i}}
+    \left[ \theta_{0}^{x_{i}}(1-\theta_{0})^{10-x_{i}} \right]^{1-z_{i}}
+    \left[ \theta_{1}^{x_{i}}(1-\theta_{1})^{10-x_{i}} \right]^{z_{i}}\\
+\end{align*}
 
 * DA Method
 \appendix
