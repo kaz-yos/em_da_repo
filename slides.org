@@ -1569,12 +1569,12 @@ system("convert -delay 80 ./source/ip_rgl_*.png ./source/ip_rgl.gif")
   &\propto \sum^{1}_{z_{1}=0}\dots\sum^{1}_{z_{5}=0} p(\btheta, z_{1},\dots,z_{5}, \bX_{1},\dots,\bX_{5})\\
   &~~~\text{iid given parameter}\\
   &= \sum^{1}_{z_{1}=0}\dots\sum^{1}_{z_{5}=0} \prod^{5}_{i=1}p(X_{i} | z_{i},\btheta) p(z_{i}) p(\btheta)\\
-  % https://math.stackexchange.com/questions/705945/how-to-interchange-a-sum-and-a-product
   &= \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(X_{i} | z_{i},\btheta) p(z_{i}) p(\btheta)\\
   &= p(\btheta) \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(X_{i} | z_{i},\btheta) p(z_{i})\\
   &= p(\btheta) \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(X_{i} | z_{i}, \btheta) (0.5)\\
   &\propto p(\btheta) \prod^{5}_{i=1} \sum^{1}_{z_{i}=0} p(X_{i} | z_{i}, \btheta)
 \end{align*}
+- See [[https://math.stackexchange.com/questions/705945/how-to-interchange-a-sum-and-a-product][How to interchange a sum and a product?]] for swapping the sums and the product.
 
 ** Stan Implementation
    :PROPERTIES:
