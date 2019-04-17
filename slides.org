@@ -906,7 +906,7 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
 
 * EM Extra slides
 \appendix
-** Title DA
+** Title EM Extra Slides
    :PROPERTIES:
    :BEAMER_ENV: fullframe
    :END:
