@@ -86,7 +86,7 @@
 #+ATTR_LATEX: :width 0.8\textwidth :options page=1,keepaspectratio :center t
 [[./source/em_algo.png]]
 \footnotesize
-To be presented as a part of the Mini Statistics Camp 2019 hosted by the [[http://bioinformatics.bwh.harvard.edu][BWH/HMS Bioinformatics Club]]. The slides contain the corresponding Bayesian inference using the [[DA Method][Data Augmentation]] method and [[Stan][Stan]].
+To be presented as a part of the Mini Statistics Camp 2019 hosted by the [[http://bioinformatics.bwh.harvard.edu][BWH/HMS Bioinformatics Club]]. In addition to the [[EM Algorithm][EM Algorithm]], the slides contain the corresponding Bayesian inference using the [[DA Method][Data Augmentation]] method and [[Stan][Stan]].
 
 ** Introduction
 - Probabilistic models, such as hidden Markov models and Bayesian networks, are commonly used to model biological data.
@@ -103,6 +103,7 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the [[http:
     :PROPERTIES:
     :BEAMER_col: 0.45
     :END:
+- Ideal dataset: Matrix with all cells filled
 - Incomplete data encompass:
   - Typical missing data
   - Latent class (entirely unobserved class assignment)
@@ -165,7 +166,7 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the [[http:
 - The maximum likelihood estimate (MLE) is the parameter values at the peak of the figure.
 - Here the complete-data likelihood function has a unique global maximum.
 - There is an analytical solution: Heads / Tosses for each coin.
-- See [[Complete-Data Likelihood and Log Likelihood]] for the mathematical expression.
+- See the [[Complete-Data Likelihood and Log Likelihood][likelihood expression]].
 
 *** @@latex:@@                                                        :BMCOL:
     :PROPERTIES:
@@ -1886,9 +1887,9 @@ tidybayes::tidy_draws(coin_sample_ordered) %>%
 [[file:./source/figure_stan_ordered.pdf]]
 \normalsize
 
-* Appendix
+* Bibliography
 \appendix
-** Bibliography
+** Referenced Cited
    :PROPERTIES:
    :BEAMER_opt: allowframebreaks,label=,t
    :END:
