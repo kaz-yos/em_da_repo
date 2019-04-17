@@ -918,6 +918,11 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
    :PROPERTIES:
    :BEAMER_opt: allowframebreaks,label=,t
    :END:
+# "allowframebreaks,label=" breaks linking. Label the equation.
+# https://tex.stackexchange.com/questions/317607/why-doesnt-frame-option-allowframebreaks-work-when-using-the-label-option
+# https://stackoverflow.com/questions/14503695/how-do-i-link-to-a-label-in-org-mode
+#+LABEL: Complete-Data Likelihood and Log Likelihood
+#+NAME: Complete-Data Likelihood and Log Likelihood
 \begin{align*}
   L(\btheta | \bz,\bx)
   &= \prod^{5}_{i=1} p(z_{i},x_{i} | \btheta)\\
@@ -963,6 +968,11 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
    :PROPERTIES:
    :BEAMER_opt: allowframebreaks,label=,t
    :END:
+# "allowframebreaks,label=" breaks linking. Label the equation.
+# https://tex.stackexchange.com/questions/317607/why-doesnt-frame-option-allowframebreaks-work-when-using-the-label-option
+# https://stackoverflow.com/questions/14503695/how-do-i-link-to-a-label-in-org-mode
+#+LABEL: Incomplete-Data Likelihood Derivation
+#+NAME: Incomplete-Data Likelihood Derivation
 \begin{align*}
   &~~~\text{By iid}\\
   L(\btheta | \bx)
