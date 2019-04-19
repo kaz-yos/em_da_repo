@@ -403,6 +403,7 @@ B / (A + B)                                # Prob. of Coin B given 5 heads
 |   Sum |         |                      2.99 |                  2.01 |         | 21.3                             | 11.7                         |
 \normalsize
 - MLE: $\thetahat_{0}^{(1)} = 21.3 / (2.99 \times 10) = 0.71$; $\thetahat_{1}^{(1)} = 11.7 / (2.01 \times 10) = 0.58$
+- These maximize the [[Expected Log Likelihood][expected log likelihood]].
 
 ** E-Step (1)
    :PROPERTIES:
@@ -971,6 +972,40 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
 \end{align*}
 \normalsize
 
+** Expected Log Likelihood
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks,label=,t
+   :END:
+# "allowframebreaks,label=" breaks linking. Label the equation.
+# https://tex.stackexchange.com/questions/317607/why-doesnt-frame-option-allowframebreaks-work-when-using-the-label-option
+# https://stackoverflow.com/questions/14503695/how-do-i-link-to-a-label-in-org-mode
+#+LABEL: Expected Log Likelihood
+#+NAME: Expected Log Likelihood
+\begin{align*}
+  &~~~~E_{\bthetahat^{(0)}}[\log L(\btheta | \bz,\bx) | \bx]\\
+  &\propto E_{\bthetahat^{(0)}} \left[ \sum^{5}_{i=1}
+    \left\{
+    (1-z_{i}) \log \left[ \theta_{0}^{x_{i}}(1-\theta_{0})^{10-x_{i}} \right] +
+    z_{i} \log \left[ \theta_{1}^{x_{i}}(1-\theta_{1})^{10-x_{i}} \right]
+    \right\} \bigg| \bx \right]\\
+  &= \sum^{5}_{i=1}
+    \left\{
+    (1- E_{\bthetahat^{(0)}}[z_{i} | \bx]) \left[ x_{i}\log\theta_{0} + (10-x_{i})\log(1-\theta_{0})\right]
+    \right.\\
+  &~~~~~~~~~ \left.
+    + E_{\bthetahat^{(0)}}[z_{i} | \bx] \left[ x_{i}\log\theta_{1} + (10-x_{i})\log(1-\theta_{1})\right]
+    \right\}\\
+  &= \sum^{5}_{i=1}
+    \left\{
+    (1- E_{\bthetahat^{(0)}}[z_{i} | x_{i}]) \left[ x_{i}\log\theta_{0} + (10-x_{i})\log(1-\theta_{0})\right]
+    \right.\\
+  &~~~~~~~~~ \left.
+    + E_{\bthetahat^{(0)}}[z_{i} | x_{i}] \left[ x_{i}\log\theta_{1} + (10-x_{i})\log(1-\theta_{1})\right]
+    \right\}
+\end{align*}
+- The only change after the conditional expectation is that the coin indicators are now probabilities (\textit{i.e.}, expectation of indicators).
+- This confirms the validity of using expected heads and tails.
+
 ** Incomplete-Data Likelihood Derivation
    :PROPERTIES:
    :BEAMER_opt: allowframebreaks,label=,t
@@ -1061,7 +1096,7 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
 \end{align*}
 \normalsize
 - This is maximization of the expected complete-data log likelihood. The expectation is over the distribution $\bz$ given the observed data $\bx$ and assuming the current parameter value $\bthetahat^{(t)}$.
-- Therefore, the EM algorithm is equivalent to the update rule with the guaranteed improvement at each step.
+- Therefore, the [[EM algorithm][EM algorithm]] is equivalent to the update rule with the guaranteed improvement at each step.
 
 * DA Method
 \appendix
