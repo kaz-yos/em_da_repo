@@ -1096,7 +1096,7 @@ system("convert -delay 80 ./source/em_rgl_*.png ./source/em_rgl.gif")
 \end{align*}
 \normalsize
 - This is maximization of the expected complete-data log likelihood. The expectation is over the distribution $\bz$ given the observed data $\bx$ and assuming the current parameter value $\bthetahat^{(t)}$.
-- Therefore, the [[EM algorithm][EM algorithm]] is equivalent to the update rule with the guaranteed improvement at each step.
+- Therefore, the EM algorithm is equivalent to the update rule with the guaranteed improvement at each step.
 
 * DA Method
 \appendix
