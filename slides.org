@@ -82,7 +82,7 @@
 
 * Introduction
 ** Article Covered
-- Do and Batzoglou. "What is the expectation maximization algorith?" Nat. Biotechnol. 2008;26:897. cite:doWhatExpectationMaximization2008 [[https://www.cmi.ac.in/~madhavan/courses/dmml2019jan/literature/EM_algorithm_2coin_example.pdf][pdf1]] [[http://www.utdallas.edu/~prr105020/biol6385/2019/lecture/lecture_4_em_paper.pdf][pdf2]]
+- Do and Batzoglou. "What is the expectation maximization algorith?" /Nat. Biotechnol./ 2008;26:897. cite:doWhatExpectationMaximization2008 [[https://www.cmi.ac.in/~madhavan/courses/dmml2019jan/literature/EM_algorithm_2coin_example.pdf][pdf1]] [[http://www.utdallas.edu/~prr105020/biol6385/2019/lecture/lecture_4_em_paper.pdf][pdf2]]
 #+ATTR_LATEX: :width 0.8\textwidth :options page=1,keepaspectratio :center t
 [[./source/em_algo.png]]
 \footnotesize
@@ -333,7 +333,7 @@ B / (A + B)                                # Prob. of Coin B given 5 heads
 
 \newpage
 - Now we have the probabilities of coin identities.
-- This is sometimes called "soft assignment" cite:hastieElementsStatisticalLearning2016.
+- This is sometimes called "soft assignment" cite:hastieElementsStatisticalLearning2016 (8.5) as opposed to "hard assignment" as in the /K/-means algorithm cite:bishopPatternRecognitionMachine2006 (9.3.2).
 \footnotesize
 | Index | Coin    |              Prob. Coin A |          Prob. Coin B |   Heads | Heads Coin A                     | Heads Coin B                 |
 |   $i$ | $Z_{i}$ | $E[(1-Z_{i})\vert X_{i}]$ | $E[Z_{i}\vert X_{i}]$ | $X_{i}$ | $E[(1-Z_{i}) X_{i} \vert X_{i}]$ | $E[Z_{i} X_{i} \vert X_{i}]$ |
@@ -347,7 +347,7 @@ B / (A + B)                                # Prob. of Coin B given 5 heads
 |-------+---------+---------------------------+-----------------------+---------+----------------------------------+------------------------------|
 |   Sum |         |                      2.99 |                  2.01 |         | ?                                | ?                            |
 \normalsize
-- We then have to work with the sufficient statistics (head counts).
+- We then have to work with the [[https://www.statisticshowto.datasciencecentral.com/sufficient-statistic/][sufficient statistic]] (head counts).
 
 \newpage
 - Since we only know the probabilistic coin identities, we distribute the observed head counts across coins.
@@ -365,6 +365,7 @@ B / (A + B)                                # Prob. of Coin B given 5 heads
 |   Sum |         |                      2.99 |                  2.01 |         | ?                                | ?                            |
 \normalsize
 - We then add up the fractional head counts for each coin.
+- This pattern of "the distribution of the sufficient statistics" is characteristics to the [[http://www.stats.ox.ac.uk/~flaxman/HT17_lecture6.pdf][EM in the exponential family]].
 
 \newpage
 - Calculate the expected heads and consider expected tosses.
