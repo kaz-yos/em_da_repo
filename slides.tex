@@ -1,4 +1,4 @@
-% Created 2019-04-28 Sun 05:17
+% Created 2019-05-18 Sat 07:51
 % Intended LaTeX compiler: pdflatex
 \documentclass[dvipdfmx,bigger,aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
@@ -73,12 +73,12 @@ linkcolor= blue
 
 \maketitle
 \section{Opening}
-\label{sec:org1cdfcbc}
+\label{sec:org780cacb}
 
 
 \section{Introduction}
-\label{sec:org9de3882}
-\begin{frame}[label={sec:org49dc961}]{Article Covered}
+\label{sec:orgc04c78e}
+\begin{frame}[label={sec:org053d81e}]{Article Covered}
 \begin{itemize}
 \item Do and Batzoglou. "What is the expectation maximization algorith?" \emph{Nat. Biotechnol.} 2008;26:897. \cite{doWhatExpectationMaximization2008} \href{https://www.cmi.ac.in/\~madhavan/courses/dmml2019jan/literature/EM\_algorithm\_2coin\_example.pdf}{pdf1} \href{http://www.utdallas.edu/\~prr105020/biol6385/2019/lecture/lecture\_4\_em\_paper.pdf}{pdf2}
 \end{itemize}
@@ -86,10 +86,10 @@ linkcolor= blue
 \includegraphics[page=1,keepaspectratio,width=0.8\textwidth]{./source/em_algo.png}
 \end{center}
 \footnotesize
-To be presented as a part of the Mini Statistics Camp 2019 hosted by the \href{http://bioinformatics.bwh.harvard.edu}{BWH/HMS Bioinformatics Club}. In addition to the \hyperlink{sec:orgd2f2888}{EM Algorithm}, the slides contain the corresponding Bayesian inference using the \hyperlink{sec:orgc38518e}{Data Augmentation} method and \hyperlink{sec:orga462918}{Stan}.
+To be presented as a part of the Mini Statistics Camp 2019 hosted by the \href{http://bioinformatics.bwh.harvard.edu}{BWH/HMS Bioinformatics Club}. In addition to the \hyperlink{sec:orge51736c}{EM Algorithm}, the slides contain the corresponding Bayesian inference using the \hyperlink{sec:orga3444c4}{Data Augmentation} method and \hyperlink{sec:orgdd0290a}{Stan}.
 \end{frame}
 
-\begin{frame}[label={sec:orgb8b256b}]{Motivation}
+\begin{frame}[label={sec:orgbc5c7a5}]{Motivation}
 \begin{itemize}
 \item Probabilistic models, such as hidden Markov models and Bayesian networks, are commonly used to model biological data.
 \end{itemize}
@@ -106,7 +106,7 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the \href{h
 \end{frame}
 
 
-\begin{frame}[label={sec:orga64fe3d}]{Incomplete data}
+\begin{frame}[label={sec:orgf962357}]{Incomplete data}
 \begin{columns}
 \begin{column}{0.45\columnwidth}
 \begin{itemize}
@@ -123,12 +123,12 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the \href{h
 \begin{center}
 \includegraphics[page=1,keepaspectratio,width=\textwidth,height=0.75\textheight]{./source/missing_patterns.png}
 \end{center}
-\scriptsize \cite{littleStatisticalAnalysisMissing2002} \normalsize
+\scriptsize \cite{littleStatisticalAnalysisMissing2019} \normalsize
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org9de2071}]{EM Algorithm Applications}
+\begin{frame}[label={sec:org339c179}]{EM Algorithm Applications}
 \begin{itemize}
 \item Many probabilistic models in computational biology include latent variables. \cite{doWhatExpectationMaximization2008}
 \begin{itemize}
@@ -147,8 +147,8 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the \href{h
 \end{frame}
 
 \section{Experiment Setup}
-\label{sec:org087caaf}
-\begin{frame}[label={sec:org7bb652c}]{A Coin-Flipping Experiment}
+\label{sec:orgb9344bf}
+\begin{frame}[label={sec:org7086c67}]{A Coin-Flipping Experiment}
 \begin{itemize}
 \item Two coins \(A\) (0) and \(B\) (1) with unknown head probabilities \((\theta_{0},\theta_{1})\)
 \item Repeat 5 times
@@ -162,7 +162,7 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the \href{h
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orgace2faf}]{A Coin-Flipping Experiment (More Formal)}
+\begin{frame}[label={sec:org1bda553}]{A Coin-Flipping Experiment (More Formal)}
 \begin{itemize}
 \item Two coins \(A\) (0) and \(B\) (1) with unknown head probabilities \((\theta_{0},\theta_{1})\)
 \item For \(i = 1, \dots, 5\)
@@ -189,8 +189,8 @@ Index & Coin & Heads\\
 \end{frame}
 
 \section{Complete-Data Case}
-\label{sec:org8969c91}
-\begin{frame}[label={sec:org74aa41d}]{Complete-Data Maximum Likelihood}
+\label{sec:org39a1182}
+\begin{frame}[label={sec:org38fbdb1}]{Complete-Data Maximum Likelihood}
 \begin{itemize}
 \item If we observe both the coin identity \(Z_{i}\) and heads \(X_{i}\), the MLE is the total heads / total tosses for each coin.
 \item Here we introduce a very redundant expanded table for later reuse.
@@ -215,14 +215,14 @@ Sum &  & 3 & 2 & 33 & 24 & 9\\
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org2cd99a9}]{Complete-Data Likelihood Visualization}
+\begin{frame}[label={sec:org4abdd99}]{Complete-Data Likelihood Visualization}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
 \item The maximum likelihood estimate (MLE) is the parameter values at the peak of the figure.
 \item Here the complete-data likelihood function has a unique global maximum.
 \item There is an analytical solution: Heads / Tosses for each coin.
-\item See the \hyperlink{eq:org9bf4fac}{likelihood expression}.
+\item See the \hyperlink{eq:org06354f3}{likelihood expression}.
 \end{itemize}
 \end{column}
 
@@ -237,8 +237,8 @@ Sum &  & 3 & 2 & 33 & 24 & 9\\
 \end{frame}
 
 \section{Experiment Setup (Incomplete Data)}
-\label{sec:org188ee55}
-\begin{frame}[label={sec:org9c69f01}]{A Contrived Coin-Flipping Experiment}
+\label{sec:orgea6fde4}
+\begin{frame}[label={sec:org79fcf65}]{A Contrived Coin-Flipping Experiment}
 \begin{itemize}
 \item Two identical-looking coins with unknown head probabilities
 \item Repeat 5 times
@@ -264,7 +264,7 @@ Index & Coin & Heads\\
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgb775f94}]{A Contrived Coin-Flipping Experiment (More Formal)}
+\begin{frame}[label={sec:orga4c83f4}]{A Contrived Coin-Flipping Experiment (More Formal)}
 \begin{itemize}
 \item Two identical-looking coins with unknown head probabilities \((\theta_{0},\theta_{1})\) (index arbitrary)
 \item For \(i = 1, \dots, 5\)
@@ -287,7 +287,7 @@ Index & Coin & Heads\\
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orgfd6f4d0}]{How Do We Approach Incomplete Data}
+\begin{frame}[label={sec:org8dc5163}]{How Do We Approach Incomplete Data}
 \begin{itemize}
 \item Now we cannot compute the proportion of heads among tosses for each coin.
 \item However, one possible iterative scheme is:
@@ -296,20 +296,20 @@ Index & Coin & Heads\\
 \item Guess coin identities given data and assuming these parameter values
 \item Perform MLE given data and assuming coin identities
 \end{itemize}
-\item The \hyperlink{sec:orgd2f2888}{Expectation-Maximization (EM) Algorithm} \cite{dempsterMaximumLikelihoodIncomplete1977} is a refinement of this idea for MLE.
-\item The \hyperlink{sec:orgc38518e}{Data Augmentation Method} \cite{tannerCalculationPosteriorDistributions1987} is another type of refinement for Bayesian estimation.
+\item The \hyperlink{sec:orge51736c}{Expectation-Maximization (EM) Algorithm} \cite{dempsterMaximumLikelihoodIncomplete1977} is a refinement of this idea for MLE.
+\item The \hyperlink{sec:orga3444c4}{Data Augmentation Method} \cite{tannerCalculationPosteriorDistributions1987} is another type of refinement for Bayesian estimation.
 \end{itemize}
 \end{frame}
 
 \section{EM Algorithm}
-\label{sec:orgd2f2888}
-\begin{frame}[label={sec:org64ccc36}]{}
+\label{sec:orge51736c}
+\begin{frame}[label={sec:orgc75a67f}]{}
 \begin{center}
 \resizebox{\linewidth}{!}{Expectation-Maximization Algorithm}
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orgf7dc47d}]{EM Algorithm to the Rescue}
+\begin{frame}[label={sec:org2d28237}]{EM Algorithm to the Rescue}
 \begin{itemize}
 \item The Expectation-Maximization (EM) Algorithm \cite{dempsterMaximumLikelihoodIncomplete1977}
 \item After random initialization of parameters, two steps alternates until convergence to an MLE.
@@ -329,14 +329,14 @@ Index & Coin & Heads\\
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org8116e5c}]{}
+\begin{frame}[label={sec:org5172dd8}]{}
 \begin{center}
 \includegraphics[page=1,keepaspectratio,width=\textwidth,height=\textheight]{./source/em_figure.png}
 \end{center}
 \end{frame}
 
 
-\begin{frame}[label={sec:orgbf4d83e}]{Parameter Initialization}
+\begin{frame}[label={sec:org2ad6074}]{Parameter Initialization}
 \begin{itemize}
 \item Randomly initialize the parameters
 \begin{itemize}
@@ -391,7 +391,7 @@ B / (A + B)                                # Prob. of Coin B given 5 heads
 
 \normalsize
 \begin{itemize}
-\item See also \hyperlink{sec:orgea6feb1}{Coin Probability Derivation}.
+\item See also \hyperlink{sec:org55b749f}{Coin Probability Derivation}.
 \end{itemize}
 
 \newpage
@@ -492,7 +492,7 @@ Sum &  & 2.99 & 2.01 &  & 21.3 & 11.7\\
 \normalsize
 \begin{itemize}
 \item MLE: \(\thetahat_{0}^{(1)} = 21.3 / (2.99 \times 10) = 0.71\); \(\thetahat_{1}^{(1)} = 11.7 / (2.01 \times 10) = 0.58\)
-\item These maximize the \hyperlink{eq:org12b665e}{expected log likelihood}.
+\item These maximize the \hyperlink{eq:org9f7abd0}{expected log likelihood}.
 \end{itemize}
 \end{frame}
 
@@ -582,7 +582,7 @@ em_step <- function(theta) {
 \normalsize
 \end{frame}
 
-\begin{frame}[label={sec:org69393cc},fragile]{EM Step (2)}
+\begin{frame}[label={sec:org2c949db},fragile]{EM Step (2)}
  \scriptsize
 \begin{minted}[frame=lines,linenos=false]{r}
 em_step(theta = c(0.6, 0.5)) %>% magrittr::extract2("M") %>%
@@ -656,7 +656,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \normalsize
 \end{frame}
 
-\begin{frame}[label={sec:org03ef66f}]{Visual Representation of Iteration}
+\begin{frame}[label={sec:orge6e00f8}]{Visual Representation of Iteration}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -680,7 +680,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{frame}
 
 
-\begin{frame}[label={sec:org84df443}]{Multiple Initialization and Label Indeterminancy}
+\begin{frame}[label={sec:org8c6a755}]{Multiple Initialization and Label Indeterminancy}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -701,11 +701,11 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org46d3921}]{Incomplete-Data Likelihood}
+\begin{frame}[label={sec:orgfbc7134}]{Incomplete-Data Likelihood}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
-\item In this specific instance, the \hyperlink{eq:orgeaa8e48}{incomplete-data likelihood} can be graphed with grid search as the parameter space is small and low dimensional ([0,1]\textsuperscript{2}).
+\item In this specific instance, the \hyperlink{eq:org42c77c5}{incomplete-data likelihood} can be graphed with grid search as the parameter space is small and low dimensional ([0,1]\textsuperscript{2}).
 \item The incomplete-data likelihood is bimodal and has a saddle point between the modes.
 \item This shape explains the three solutions.
 \end{itemize}
@@ -720,7 +720,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org3f35d28}]{EM: Incomplete-Data Likelihood}
+\begin{frame}[label={sec:org1e71534}]{EM: Incomplete-Data Likelihood}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -737,7 +737,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgb253fc4}]{EM: E Step (0)}
+\begin{frame}[label={sec:org4d7b3ca}]{EM: E Step (0)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -752,7 +752,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org434d306}]{EM: M Step (0)}
+\begin{frame}[label={sec:org477cdbb}]{EM: M Step (0)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -767,7 +767,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org4967e99}]{EM: E Step (1)}
+\begin{frame}[label={sec:org14a69e9}]{EM: E Step (1)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -782,7 +782,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org2f7474f}]{EM: M Step (1)}
+\begin{frame}[label={sec:org65f8c95}]{EM: M Step (1)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -797,7 +797,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgda9b5a5}]{EM: E Step (2)}
+\begin{frame}[label={sec:org5882814}]{EM: E Step (2)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -812,7 +812,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org77943c7}]{EM: M Step (2)}
+\begin{frame}[label={sec:orgfeaacf7}]{EM: M Step (2)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -827,7 +827,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgfe76f46}]{EM: E Step (3)}
+\begin{frame}[label={sec:org01893ca}]{EM: E Step (3)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -842,7 +842,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgdd49fa7}]{EM: M Step (3)}
+\begin{frame}[label={sec:org6cf04c1}]{EM: M Step (3)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -857,7 +857,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org4dccab9}]{EM: E Step (4)}
+\begin{frame}[label={sec:orgf6669b4}]{EM: E Step (4)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -872,7 +872,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgdad59cc}]{EM: M Step (4)}
+\begin{frame}[label={sec:orge3cb0b3}]{EM: M Step (4)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -887,7 +887,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org8eea93c}]{EM: E Step (5)}
+\begin{frame}[label={sec:orgf0e9c91}]{EM: E Step (5)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -902,7 +902,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org8151266}]{EM: M Step (5)}
+\begin{frame}[label={sec:org497aeff}]{EM: M Step (5)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -918,9 +918,9 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{frame}
 
 \section{EM Extra slides}
-\label{sec:org1fb702f}
+\label{sec:orga0a7175}
 \appendix
-\begin{frame}[label={sec:orgaa5c6f5}]{}
+\begin{frame}[label={sec:orgff87b7c}]{}
 \begin{center}
 \resizebox{\linewidth}{!}{EM Extra Slides}
 \end{center}
@@ -928,7 +928,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 
 \begin{frame}[allowframebreaks,label=,t]{Complete-Data Likelihood and Log Likelihood}
 \begin{align*}
-\label{eq:org9bf4fac}
+\label{eq:org06354f3}
   L(\btheta | \bz,\bx)
   &= \prod^{5}_{i=1} p(z_{i},x_{i} | \btheta)\\
   &= \prod^{5}_{i=1} p(x_{i} | z_{i}, \btheta) p(z_{i} | \btheta)\\
@@ -956,7 +956,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgea6feb1}]{Coin Probability Derivation}
+\begin{frame}[label={sec:org55b749f}]{Coin Probability Derivation}
 \begin{itemize}
 \item Probability of Coin B given the number of heads observed and current parameters:
 \end{itemize}
@@ -977,7 +977,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 
 \begin{frame}[allowframebreaks,label=,t]{Expected Log Likelihood}
 \begin{align*}
-\label{eq:org12b665e}
+\label{eq:org9f7abd0}
   &~~~~E_{\bthetahat^{(0)}}[\log L(\btheta | \bz,\bx) | \bx]\\
   &\propto E_{\bthetahat^{(0)}} \left[ \sum^{5}_{i=1}
     \left\{
@@ -1007,7 +1007,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 
 \begin{frame}[allowframebreaks,label=,t]{Incomplete-Data Likelihood Derivation}
 \begin{align*}
-\label{eq:orgeaa8e48}
+\label{eq:org42c77c5}
   &~~~\text{By iid}\\
   L(\btheta | \bx)
   &= \prod^{5}_{i=1}p(x_{i} | \btheta)\\
@@ -1100,15 +1100,15 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{frame}
 
 \section{DA Method}
-\label{sec:orgc38518e}
+\label{sec:orga3444c4}
 \appendix
-\begin{frame}[label={sec:orge426ece}]{}
+\begin{frame}[label={sec:org0958b5c}]{}
 \begin{center}
 \resizebox{\linewidth}{!}{Data Augmentation Method}
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orgba8e328}]{From EM to DA}
+\begin{frame}[label={sec:org97ef8aa}]{From EM to DA}
 \begin{itemize}
 \item A related Bayesian computation method is the \emph{Data Augmentation} method. \cite{tannerCalculationPosteriorDistributions1987,tannerEMDataAugmentation2010}
 \item Here we treat the simplest case that reduces to the two-step Gibbs sampling. \cite{gemanStochasticRelaxationGibbs1984,vandykArtDataAugmentation2001}
@@ -1128,7 +1128,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org72b964e}]{Model Configuration}
+\begin{frame}[label={sec:org766340f}]{Model Configuration}
 \begin{itemize}
 \item To set up a Bayesian computation, we need probability models for the data (likelihood) as well as the parameters (prior).
 \item Likelihood
@@ -1149,7 +1149,7 @@ em_iter <- function(theta, tolerance = 10^(-3)) {
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgbcdd2fe}]{Parameter Initialization}
+\begin{frame}[label={sec:org375800c}]{Parameter Initialization}
 \begin{itemize}
 \item Randomly initialize the parameters
 \begin{itemize}
@@ -1461,7 +1461,7 @@ ip_iter <- function(theta, a = c(1,1), b = c(1,1), iter = 10) {
 \normalsize
 \end{frame}
 
-\begin{frame}[label={sec:orgac13b00}]{Visual Representation of Initial Iterations}
+\begin{frame}[label={sec:orgad11c2c}]{Visual Representation of Initial Iterations}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -1481,7 +1481,7 @@ ip_iter <- function(theta, a = c(1,1), b = c(1,1), iter = 10) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org34c1312}]{Visual Representation of Posterior Samples}
+\begin{frame}[label={sec:orgb8266fd}]{Visual Representation of Posterior Samples}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -1500,7 +1500,7 @@ ip_iter <- function(theta, a = c(1,1), b = c(1,1), iter = 10) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgb8df214}]{Visual Representation of Posterior Density}
+\begin{frame}[label={sec:org4c2dde5}]{Visual Representation of Posterior Density}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -1519,7 +1519,7 @@ ip_iter <- function(theta, a = c(1,1), b = c(1,1), iter = 10) {
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org864e7fd}]{DA: Animation}
+\begin{frame}[label={sec:orgf16dc49}]{DA: Animation}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -1538,15 +1538,15 @@ ip_iter <- function(theta, a = c(1,1), b = c(1,1), iter = 10) {
 \end{frame}
 
 \section{Stan}
-\label{sec:orga462918}
+\label{sec:orgdd0290a}
 \appendix
-\begin{frame}[label={sec:orgddf5829}]{}
+\begin{frame}[label={sec:orgba2cd19}]{}
 \begin{center}
 \resizebox{\linewidth}{!}{Sampling Using Stan}
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orgb7abffc}]{Stan: Hamiltonian Monte Carlo}
+\begin{frame}[label={sec:orga87353a}]{Stan: Hamiltonian Monte Carlo}
 \begin{itemize}
 \item Traditional Bayesian posterior sampling software, such as WinBUGS \cite{lunnWinBUGSBayesianModelling2000} and JAGS \cite{plummerJAGSProgramAnalysis2003}, are Gibbs samplers.
 \item Gibbs sampling in this incomplete-data setting implements the data augmentation method.
@@ -1635,7 +1635,7 @@ theta[1]   0.64    0.00 0.17   0.29   0.51   0.65  0.77  0.92 12103    1
 theta[2]   0.64    0.00 0.17   0.29   0.52   0.66  0.77  0.91 12097    1
 lp__     -10.43    0.01 1.08 -13.43 -10.76 -10.05 -9.73 -9.51 14398    1
 
-Samples were drawn using NUTS(diag_e) at Sun Apr 28 05:16:22 2019.
+Samples were drawn using NUTS(diag_e) at Sat May 18 07:50:12 2019.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).
@@ -1644,7 +1644,7 @@ convergence, Rhat=1).
 \normalsize
 \end{frame}
 
-\begin{frame}[label={sec:orgbd23661}]{Stan Diagnostic Plots}
+\begin{frame}[label={sec:orgec3fbbf}]{Stan Diagnostic Plots}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{center}
@@ -1663,7 +1663,7 @@ convergence, Rhat=1).
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgca4ef23}]{Visual Representation of Stan Initial Iterations}
+\begin{frame}[label={sec:org7182219}]{Visual Representation of Stan Initial Iterations}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -1681,7 +1681,7 @@ convergence, Rhat=1).
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org7995788}]{Stan Posterior Samples}
+\begin{frame}[label={sec:orgabe220b}]{Stan Posterior Samples}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -1792,7 +1792,7 @@ theta[1]             1
 theta[2]             1
 lp__                 1
 
-Samples were drawn using NUTS(diag_e) at Sun Apr 28 05:17:07 2019.
+Samples were drawn using NUTS(diag_e) at Sat May 18 07:51:15 2019.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).
@@ -1801,7 +1801,7 @@ convergence, Rhat=1).
 \normalsize
 \end{frame}
 
-\begin{frame}[label={sec:org33cab1e}]{Stan Diagnostic Plots (Ordered Prior)}
+\begin{frame}[label={sec:org63b32f2}]{Stan Diagnostic Plots (Ordered Prior)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{center}
@@ -1820,7 +1820,7 @@ convergence, Rhat=1).
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org1797768}]{Visual Representation of Stan Initial Iterations (Ordered Prior)}
+\begin{frame}[label={sec:orgbf23c8d}]{Visual Representation of Stan Initial Iterations (Ordered Prior)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -1838,7 +1838,7 @@ convergence, Rhat=1).
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgbec30de}]{Stan Posterior Samples (Ordered Prior)}
+\begin{frame}[label={sec:orgebc4be9}]{Stan Posterior Samples (Ordered Prior)}
 \begin{columns}
 \begin{column}{0.50\columnwidth}
 \begin{itemize}
@@ -1857,7 +1857,7 @@ convergence, Rhat=1).
 \end{frame}
 
 \section{Bibliography}
-\label{sec:orgb397b14}
+\label{sec:orgc73c2ba}
 \appendix
 \begin{frame}[allowframebreaks,label=,t]{Referenced Cited}
 \tiny

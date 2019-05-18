@@ -114,7 +114,7 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the [[http:
     :END:
 #+ATTR_LATEX: :height 0.75\textheight :width \textwidth :options page=1,keepaspectratio :center t
 [[./source/missing_patterns.png]]
-\scriptsize cite:littleStatisticalAnalysisMissing2002 \normalsize
+\scriptsize cite:littleStatisticalAnalysisMissing2019 \normalsize
 
 ** EM Algorithm Applications
 - Many probabilistic models in computational biology include latent variables. cite:doWhatExpectationMaximization2008
