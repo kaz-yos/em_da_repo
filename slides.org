@@ -50,7 +50,7 @@
   #+LATEX_HEADER: \usepackage{grffile}
   #+LATEX_HEADER: %% DAG
   #+LATEX_HEADER: \usepackage{tikz}
-  #+LATEX_HEADER: \usetikzlibrary{positioning,shapes.geometric}
+  #+LATEX_HEADER: \usetikzlibrary{positioning,shapes.geometric,bayesnet}
   #+LATEX_HEADER: %% Allow URL embedding
   #+LATEX_HEADER: \usepackage{url}
   #+LATEX_HEADER: %% Do not count backup slides.
@@ -152,6 +152,26 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the [[http:
 |     4 |       1 |       4 |
 |     5 |       0 |       7 |
 - Note that you only need the number of heads ([[https://www.statisticshowto.datasciencecentral.com/sufficient-statistic/][sufficient statistic]]), not the entire sequence.
+
+** A Coin-Flipping Experiment (Graphical)
+- Two coins $A$ (0) and $B$ (1) with unknown head probabilities $(\theta_{0},\theta_{1})$
+- For $i = 1, \dots, 5$
+  1. Draw $Z_{i} \sim \text{Bernoulli}(p = 0.5), Z_{i} \in \left\{ 0,1 \right\}$
+  2. Draw $X_{i} | Z_{i} \sim \text{Binomial}(n = 10, p = \theta_{Z_{i}}), X_{i} \in \left\{ 0, \dots, 10 \right\}$
+#+BEGIN_CENTER
+\begin{tikzpicture}
+% nodes
+ \node[obs] (x) {$X_{i}$};%
+ \node[latent,above=of x,xshift=+1.5cm,fill] (theta) {$\boldsymbol{\theta}$}; %
+ \node[obs,above=of x,xshift=0cm] (z) {$Z_{i}$}; %
+ \node[const,above=of z,xshift=0cm] (p) {$0.5$}; %
+% plate
+ \plate [inner sep=.25cm,yshift=.2cm] {plate1} {(x)(z)} {$i=1, \dots, 5$}; %
+% edges
+  \edge {theta,z} {x};
+  \edge {p} {z};
+\end{tikzpicture}
+#+END_CENTER
 
 * Complete-Data Case
 ** Complete-Data Maximum Likelihood
@@ -255,6 +275,26 @@ lik_data %>%
 |     3 | ?       |       8 |
 |     4 | ?       |       4 |
 |     5 | ?       |       7 |
+
+** A Contrived Coin-Flipping Experiment (Graphical)
+- Two coins $A$ (0) and $B$ (1) with unknown head probabilities $(\theta_{0},\theta_{1})$
+- For $i = 1, \dots, 5$
+  1. Draw $Z_{i} \sim \text{Bernoulli}(p = 0.5), Z_{i} \in \left\{ 0,1 \right\}$
+  2. Draw $X_{i} | Z_{i} \sim \text{Binomial}(n = 10, p = \theta_{Z_{i}}), X_{i} \in \left\{ 0, \dots, 10 \right\}$
+#+BEGIN_CENTER
+\begin{tikzpicture}
+% nodes
+ \node[obs] (x) {$X_{i}$};%
+ \node[latent,above=of x,xshift=+1.5cm,fill] (theta) {$\boldsymbol{\theta}$}; %
+ \node[latent,above=of x,xshift=0cm] (z) {$Z_{i}$}; %
+ \node[const,above=of z,xshift=0cm] (p) {$0.5$}; %
+% plate
+ \plate [inner sep=.25cm,yshift=.2cm] {plate1} {(x)(z)} {$i=1, \dots, 5$}; %
+% edges
+  \edge {theta,z} {x};
+  \edge {p} {z};
+\end{tikzpicture}
+#+END_CENTER
 
 ** How Do We Approach Incomplete Data
 - Now we cannot compute the proportion of heads among tosses for each coin.
