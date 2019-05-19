@@ -143,21 +143,10 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the [[http:
 - For $i = 1, \dots, 5$
   1. Draw $Z_{i} \sim \text{Bernoulli}(p = 0.5), Z_{i} \in \left\{ 0,1 \right\}$
   2. Draw $X_{i} | Z_{i} \sim \text{Binomial}(n = 10, p = \theta_{Z_{i}}), X_{i} \in \left\{ 0, \dots, 10 \right\}$
-| Index |    Coin |   Heads |
-|   $i$ | $Z_{i}$ | $X_{i}$ |
-|-------+---------+---------|
-|     1 |       1 |       5 |
-|     2 |       0 |       9 |
-|     3 |       0 |       8 |
-|     4 |       1 |       4 |
-|     5 |       0 |       7 |
-- Note that you only need the number of heads ([[https://www.statisticshowto.datasciencecentral.com/sufficient-statistic/][sufficient statistic]]), not the entire sequence.
-
-** A Coin-Flipping Experiment (Graphical)
-- Two coins $A$ (0) and $B$ (1) with unknown head probabilities $(\theta_{0},\theta_{1})$
-- For $i = 1, \dots, 5$
-  1. Draw $Z_{i} \sim \text{Bernoulli}(p = 0.5), Z_{i} \in \left\{ 0,1 \right\}$
-  2. Draw $X_{i} | Z_{i} \sim \text{Binomial}(n = 10, p = \theta_{Z_{i}}), X_{i} \in \left\{ 0, \dots, 10 \right\}$
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
 #+BEGIN_CENTER
 \begin{tikzpicture}
 % nodes
@@ -172,6 +161,20 @@ To be presented as a part of the Mini Statistics Camp 2019 hosted by the [[http:
   \edge {p} {z};
 \end{tikzpicture}
 #+END_CENTER
+
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+| Index |    Coin |   Heads |
+|   $i$ | $Z_{i}$ | $X_{i}$ |
+|-------+---------+---------|
+|     1 |       1 |       5 |
+|     2 |       0 |       9 |
+|     3 |       0 |       8 |
+|     4 |       1 |       4 |
+|     5 |       0 |       7 |
+\footnotesize Note that you only need the number of heads ([[https://www.statisticshowto.datasciencecentral.com/sufficient-statistic/][sufficient statistic]]), not the entire sequence. \normalsize
 
 * Complete-Data Case
 ** Complete-Data Maximum Likelihood
@@ -267,20 +270,10 @@ lik_data %>%
 - For $i = 1, \dots, 5$
   1. Draw /latent/ $Z_{i} \sim \text{Bernoulli}(p = 0.5), Z_{i} \in \left\{ 0,1 \right\}$
   2. Draw $X_{i} | Z_{i} \sim \text{Binomial}(n = 10, p = \theta_{Z_{i}}), X_{i} \in \left\{ 0, \dots, 10 \right\}$
-| Index | Coin    |   Heads |
-|   $i$ | $Z_{i}$ | $X_{i}$ |
-|-------+---------+---------|
-|     1 | ?       |       5 |
-|     2 | ?       |       9 |
-|     3 | ?       |       8 |
-|     4 | ?       |       4 |
-|     5 | ?       |       7 |
-
-** A Contrived Coin-Flipping Experiment (Graphical)
-- Two coins $A$ (0) and $B$ (1) with unknown head probabilities $(\theta_{0},\theta_{1})$
-- For $i = 1, \dots, 5$
-  1. Draw $Z_{i} \sim \text{Bernoulli}(p = 0.5), Z_{i} \in \left\{ 0,1 \right\}$
-  2. Draw $X_{i} | Z_{i} \sim \text{Binomial}(n = 10, p = \theta_{Z_{i}}), X_{i} \in \left\{ 0, \dots, 10 \right\}$
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
 #+BEGIN_CENTER
 \begin{tikzpicture}
 % nodes
@@ -295,6 +288,19 @@ lik_data %>%
   \edge {p} {z};
 \end{tikzpicture}
 #+END_CENTER
+
+*** @@latex:@@                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :END:
+| Index | Coin    |   Heads |
+|   $i$ | $Z_{i}$ | $X_{i}$ |
+|-------+---------+---------|
+|     1 | ?       |       5 |
+|     2 | ?       |       9 |
+|     3 | ?       |       8 |
+|     4 | ?       |       4 |
+|     5 | ?       |       7 |
 
 ** How Do We Approach Incomplete Data
 - Now we cannot compute the proportion of heads among tosses for each coin.
