@@ -82,7 +82,7 @@
 
 * Introduction
 ** Article Covered
-- Do and Batzoglou. "What is the expectation maximization algorith?" /Nat. Biotechnol./ 2008;26:897. cite:doWhatExpectationMaximization2008 [[https://www.cmi.ac.in/~madhavan/courses/dmml2019jan/literature/EM_algorithm_2coin_example.pdf][pdf1]] [[http://www.utdallas.edu/~prr105020/biol6385/2019/lecture/lecture_4_em_paper.pdf][pdf2]]
+- Do and Batzoglou. "What is the expectation maximization algorithm?" /Nat. Biotechnol./ 2008;26:897. cite:doWhatExpectationMaximization2008 [[https://www.cmi.ac.in/~madhavan/courses/dmml2019jan/literature/EM_algorithm_2coin_example.pdf][pdf1]] [[http://www.utdallas.edu/~prr105020/biol6385/2019/lecture/lecture_4_em_paper.pdf][pdf2]]
 #+ATTR_LATEX: :width 0.8\textwidth :options page=1,keepaspectratio :center t
 [[./source/em_algo.png]]
 \footnotesize
